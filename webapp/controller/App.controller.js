@@ -22,7 +22,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
             });
             if (window.location.hostname !== 'localhost') {
                 this.oWs.attachClose(function (e) {
-                    //sap.m.MessageToast.show('Websocket connection closed');
+                    sap.m.MessageToast.show('Websocket connection closed');
                     setTimeout(function () {
                         this._setupWebsocketChannel();
                     }.bind(this), 1000);
@@ -49,6 +49,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
                 aEntries.unshift(oEntry);
                 oModel.refresh(true);
             });
+        },
+        onPost: function(oEvent) {
+        	this.oWs.send(oEvent.getParameter('value'));
         }
     });
 });
