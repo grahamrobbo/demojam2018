@@ -1,6 +1,6 @@
 SAPUI5ApplicationName=YDEMOJAM18
 SAPUI5ApplicationPackage=$DJ18_UI
-SAPUI5ApplicationDescription=DemoJam 2018 UI
+SAPUI5ApplicationDescription=DemoJam 2018
 WorkbenchRequest=MADK915217
 ExternalCodePage=Cp1252
 AcceptUnixStyleEol=True
