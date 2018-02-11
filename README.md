@@ -1,2 +1,2 @@
-# demojam2018_backend
-ABAP code for Aussie Demojam 2018
+# demojam2018
+Repo for Aussie Demojam 2018
