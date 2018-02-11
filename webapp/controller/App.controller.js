@@ -2,6 +2,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
     "use strict";
     return Controller.extend("yelcho.dj18.controller.App", {
         onInit: function () {
+            this._setupWebsocketChannel();
+        },
+        _setupWebsocketChannel: function () {
             // Check if WebSockets are supported
             if (!sap.ui.Device.support.websocket) {
                 sap.m.MessageBox.show("Your SAPUI5 version does not support WebSockets. Use version ...", {
@@ -11,9 +14,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
                 });
                 return;
             }
-            this._setupWebsocketChannel();
-        },
-        _setupWebsocketChannel: function () {
             // Establish WebSocket Connection
             this.oWs = new SapPcpWebSocket('/sap/bc/apc/sap/ydemojam_2018', SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
             // Register Callbacj Functions on WebSocket Events
