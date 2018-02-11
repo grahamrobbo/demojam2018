@@ -44,7 +44,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
                 var oEntry = JSON.parse(oEvent.getParameter("data"));
                 // Format Timestamp
                 var oFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({ style: "medium" });
-                oEntry.Date = oFormat.format(new Date(oEntry.Date));
+                oEntry.date = oFormat.format(new Date(oEntry.date));
                 // update model
                 var aEntries = oModel.getData().EntryCollection;
                 aEntries.unshift(oEntry);
