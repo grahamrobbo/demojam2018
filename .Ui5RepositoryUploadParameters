@@ -1,0 +1,6 @@
+SAPUI5ApplicationName=YDEMOJAM
+SAPUI5ApplicationPackage=$DJ18_UI
+SAPUI5ApplicationDescription=DemoJam 2018 UI
+ExternalCodePage=Cp1252
+AcceptUnixStyleEol=True
+DeltaMode=True

@@ -1,0 +1,12 @@
+^([/|\\].*).gitignore$
+^([/|\\].*).gitmodules$
+^([/|\\].*).jshintrc$
+^([/|\\].*).jshintignore$
+^([/|\\].*).Ui5RepositoryIgnore$
+^([/|\\].*).Ui5RepositoryTextFiles$
+^([/|\\].*).Ui5RepositoryUploadParameters$
+^([/|\\].*)README.md$
+^([/|\\].*).abapgit.xml$
+^([/|\\].*)indexlocal.html
+src
+python
