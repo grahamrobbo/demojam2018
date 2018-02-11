@@ -1,9 +1,28 @@
 <mvc:View controllerName="yelcho.dj18.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-    <Page title="APC">
+<!--     <Page title="APC">
         <content>
-            <FeedInput post="onPost" showIcon="false" class="sapUiExploredFeedMargin" />
+ -->
+             <FeedInput post="onPost" showIcon="false"  />
             <List showSeparators="Inner" showNoData="false" items="{/EntryCollection}">
                 <FeedListItem showIcon="false" sender="{author}" timestamp="{Date}" text="{Text}" /> </List>
-        </content>
-    </Page>
+<!-- 	<FeedInput
+		post="onPost"
+		
+		class="sapUiSmallMarginTopBottom" />
+	<List
+		showSeparators="Inner"
+		items="{/EntryCollection}" >
+		<FeedListItem
+			sender="{Author}"
+			icon="{AuthorPicUrl}"
+			senderPress="onSenderPress"
+			iconPress="onIconPress"
+			iconDensityAware="false"
+			info="{Type}"
+			timestamp="{Date}"
+			text="{Text}"
+			convertLinksToAnchorTags="All"/>
+	</List> -->
+<!--         </content>
+    </Page> -->
 </mvc:View>
