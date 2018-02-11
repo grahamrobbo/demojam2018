@@ -61,7 +61,7 @@ def main():
     # Gently set stiff off for Head motors
     motion.setStiffnesses("Head", 0.0)
 
-    output = os.path.abspath("record.csv")
+    output = os.path.abspath("data_recording.csv")
 
     with open(output, "w") as fp:
         for line in data:
