@@ -1,4 +1,4 @@
-sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], function (Controller, SapPcpWebSocket) {
+sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "sap/ui/model/json/JSONModel", "sap/ui/core/format/DateFormat"], function (Controller, SapPcpWebSocket, JSONModel, DateFormat) {
     "use strict";
     return Controller.extend("yelcho.dj18.controller.App", {
         onInit: function () {
@@ -39,6 +39,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
                     });
                     return;
                 }
+
                 // Parse Message
                 var oEntry = JSON.parse(oEvent.getParameter("data"));
                 // Format Timestamp
@@ -49,6 +50,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
                 aEntries.unshift(oEntry);
                 oModel.refresh(true);
             });
+
+            this.oWs.attachClose(function(oEvent){
+
+            });
+
+            this.oWs.attachError(function(oEvent){
+
+            });
+
+            // Set UI Model
+            var oModel = new JSONModel({"EntryCollection":[]});
+            this.getView().setModel(oModel);
         },
         onPost: function(oEvent) {
         	this.oWs.send(oEvent.getParameter('value'));
