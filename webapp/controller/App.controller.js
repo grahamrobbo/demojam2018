@@ -11,7 +11,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket"], 
                 });
                 return;
             }
-            //this._setupWebsocketChannel();
+            this._setupWebsocketChannel();
         },
         _setupWebsocketChannel: function () {
             // Establish WebSocket Connection
