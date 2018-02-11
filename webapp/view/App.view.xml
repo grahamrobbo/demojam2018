@@ -1,3 +1,9 @@
 <mvc:View controllerName="yelcho.dj18.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
-    <Text text="Hello World" />
-    <Button text="Say Hello" press="onShowHello" /> </mvc:View>
+    <Page title="APC">
+        <content>
+            <FeedInput post="onPost" showIcon="false" class="sapUiExploredFeedMargin" />
+            <List showSeparators="Inner" showNoData="false" items="{/EntryCollection}">
+                <FeedListItem showIcon="false" sender="{author}" timestamp="{Date}" text="{Text}" /> </List>
+        </content>
+    </Page>
+</mvc:View>
