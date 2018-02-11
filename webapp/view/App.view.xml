@@ -4,7 +4,7 @@
  -->
              <FeedInput post="onPost" showIcon="false"  />
             <List showSeparators="Inner" showNoData="false" items="{/EntryCollection}">
-                <FeedListItem showIcon="false" sender="{author}" timestamp="{Date}" text="{Text}" /> </List>
+                <FeedListItem showIcon="false" sender="{author}" timestamp="{date}" text="{text}" /> </List>
 <!-- 	<FeedInput
 		post="onPost"
 		
