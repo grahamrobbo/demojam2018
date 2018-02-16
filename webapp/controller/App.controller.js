@@ -2,7 +2,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
     "use strict";
     return Controller.extend("yelcho.dj18.controller.App", {
         onInit: function () {
+            // Set WS Model
+            var oModel = new JSONModel({ "StatusIcon": 'sap-icon://question-mark' });
+            this.getView().setModel(oModel, 'ws');
             this._setupWebsocketChannel();
+        },
+        _isConnected: function (bConnected) {
+            this.getView().getModel('ws').setProperty('/StatusIcon', bConnected ? 'sap-icon://connected' : 'sap-icon://disconnected');
         },
         _setupWebsocketChannel: function () {
             // Check if WebSockets are supported
@@ -18,17 +24,22 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
             this.oWs = new SapPcpWebSocket('/sap/bc/apc/sap/ydemojam_2018', SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
             // Register Callbacj Functions on WebSocket Events
             this.oWs.attachOpen(function (oEvent) {
-                sap.m.MessageToast.show('Websocket connection opened');
-            });
+                sap.m.MessageToast.show('Websocket connection opened!');
+                this._isConnected(true);
+            }.bind(this));
+
             if (window.location.hostname !== 'localhost') {
                 this.oWs.attachClose(function (e) {
+                    this._isConnected(false);
                     sap.m.MessageToast.show('Websocket connection closed');
                     setTimeout(function () {
                         this._setupWebsocketChannel();
                     }.bind(this), 1000);
                 }.bind(this));
             }
+            
             this.oWs.attachMessage(function (oEvent) {
+                console.dir(oEvent);
                 // Message from server arrives
                 if (oEvent.getParameter("pcpFields").errorText) {
                     // Message is an error message
@@ -39,7 +50,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
                     });
                     return;
                 }
-
                 // Parse Message
                 var oEntry = JSON.parse(oEvent.getParameter("data"));
                 // Format Timestamp
@@ -49,22 +59,24 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
                 var aEntries = oModel.getData().EntryCollection;
                 aEntries.unshift(oEntry);
                 oModel.refresh(true);
-            });
+            }.bind(this));
 
-            this.oWs.attachClose(function(oEvent){
-
-            });
-
-            this.oWs.attachError(function(oEvent){
-
-            });
-
+            this.oWs.attachClose(function (oEvent) {
+                this._isConnected(false);
+                sap.m.MessageToast.show('Websocket connection closed');
+                // setTimeout(function () {
+                //     this._setupWebsocketChannel();
+                // }.bind(this), 1000);
+            }.bind(this));
+            this.oWs.attachError(function (oEvent) {
+                this.getView().getModel('ws').setProperty('/StatusIcon', 'sap-icon://error');
+            }.bind(this));
             // Set UI Model
-            var oModel = new JSONModel({"EntryCollection":[]});
+            var oModel = new JSONModel({ "EntryCollection": [] });
             this.getView().setModel(oModel);
         },
-        onPost: function(oEvent) {
-        	this.oWs.send(oEvent.getParameter('value'));
+        onPost: function (oEvent) {
+            this.oWs.send(oEvent.getParameter('value'));
         }
     });
 });
