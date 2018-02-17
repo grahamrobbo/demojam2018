@@ -1,6 +1,32 @@
-<mvc:View controllerName="yelcho.dj18.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="yelcho.dj18.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:mc="sap.suite.ui.microchart" xmlns:layout="sap.ui.layout">
     <FeedInput post="onPost" showIcon="true" icon="{ws>/StatusIcon}" />
     <Button text="Test Payload" press="onTest" />
     <List showSeparators="Inner" showNoData="false" items="{/EntryCollection}">
         <FeedListItem showIcon="false" sender="{pcp-channel}" timestamp="{Timestamp}" text="{Message}" /> </List>
+	<Panel
+		headerText="Regular Points">
+		<layout:Grid
+			defaultSpan="XL6 L6 M6 S12"
+			content="{/regular}">
+			<layout:VerticalLayout class="sapUiTinyMargin">
+				<Text text="Chart Title" width="17rem"/>
+				<mc:LineMicroChart
+					showPoints="false"
+					size="L"
+					leftTopLabel="lt"
+					leftBottomLabel="lb"
+					rightTopLabel="rt"
+					rightBottomLabel="rb"
+					color="{"above": "Good", "below": "Critical"}"
+					press="press"
+					points="{
+						path: '/points',
+						templateShareable: true
+					}"
+					class="sapUiTinyMarginTop">
+					<mc:LineMicroChartPoint x="{x}" y="{y}"/>
+				</mc:LineMicroChart>
+			</layout:VerticalLayout>
+		</layout:Grid>
+	</Panel>
 </mvc:View>
