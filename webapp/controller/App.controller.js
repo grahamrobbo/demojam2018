@@ -21,7 +21,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
                 return;
             }
             // Establish WebSocket Connection
-            this.oWs = new SapPcpWebSocket('/sap/bc/apc/sap/ydemojam_2018', SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
+            this.oWs = new SapPcpWebSocket('/sap/bc/apc/sap/ydj2018', SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
             // Register Callbacj Functions on WebSocket Events
             this.oWs.attachOpen(function (oEvent) {
                 sap.m.MessageToast.show('Websocket connection opened!');
@@ -51,14 +51,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
                     return;
                 }
                 // Parse Message
-                var oEntry = JSON.parse(oEvent.getParameter("data"));
+                var oPCPFields = oEvent.getParameter('pcpFields');
+                var sMsg = oEvent.getParameter("data");
                 // Format Timestamp
-                var oFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({ style: "medium" });
-                oEntry.date = oFormat.format(new Date(oEntry.date));
+                //var oFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({ style: "medium" });
+                //oEntry.date = oFormat.format(new Date(oEntry.date));
                 // update model
+                oPCPFields.Message = sMsg;
                 var aEntries = oModel.getData().EntryCollection;
-                aEntries.unshift(oEntry);
+                aEntries.unshift(oPCPFields);
                 oModel.refresh(true);
+                console.dir(oModel.getData().EntryCollection);
             }.bind(this));
 
             this.oWs.attachClose(function (oEvent) {
@@ -76,7 +79,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/ws/SapPcpWebSocket", "
             this.getView().setModel(oModel);
         },
         onPost: function (oEvent) {
-            this.oWs.send(oEvent.getParameter('value'));
+            this.oWs.send(oEvent.getParameter('value'),{
+                'Sender': 'Graham'
+            });
         }
     });
 });
