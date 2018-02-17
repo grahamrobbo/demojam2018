@@ -1,5 +1,6 @@
 <mvc:View controllerName="yelcho.dj18.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
     <FeedInput post="onPost" showIcon="true" icon="{ws>/StatusIcon}" />
+    <Button text="Test Payload" press="onTest" />
     <List showSeparators="Inner" showNoData="false" items="{/EntryCollection}">
         <FeedListItem showIcon="false" sender="{pcp-channel}" timestamp="{Timestamp}" text="{Message}" /> </List>
 </mvc:View>

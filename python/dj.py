@@ -75,10 +75,9 @@ def recordData(nao_ip):
 
     data = list()
     for i in range (1, 10):
-        line = readRobotData(memory)
-        jsonify(line)
+        line = jsonify(readRobotData(memory))
         data.append(line)
-        print json.dumps(line, cls=DateTimeEncoder)
+        #print json.dumps(line, cls=DateTimeEncoder)
         time.sleep(0.5)
     return data
 
@@ -110,14 +109,14 @@ def main():
     # Gently set stiff off for Head motors
     motion.setStiffnesses("Head", 0.0)
 
-    output = os.path.abspath("data_recording.csv")
+    # output = os.path.abspath("data_recording.csv")
 
-    with open(output, "w") as fp:
-        for line in data:
-            fp.write("; ".join(str(x) for x in line))
-            fp.write("\n")
+    # with open(output, "w") as fp:
+    #     for line in data:
+    #         fp.write("; ".join(str(x) for x in line))
+    #         fp.write("\n")
 
-    print "Results written to", output
+    # print "Results written to", output
 
 
 if __name__ == "__main__":
