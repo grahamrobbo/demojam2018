@@ -52,13 +52,11 @@ class DateTimeEncoder(json.JSONEncoder):
 
 def readRobotData(memory):
     """ Read the data from ALMemory.
-    Returns a matrix of values
-
+    Returns a key/value hash table
     """
-    reading = list()
+    reading = {}
     for key in ALMEMORY_KEY_NAMES:
-        value = memory.getData(key)
-        reading.append(dict(key = value))
+        reading[key] = memory.getData(key)
     return reading
 
 def jsonify(list):
@@ -77,10 +75,6 @@ def recordData(nao_ip):
 
     data = list()
     for i in range (1, 10):
-        # line = list()
-        # for key in ALMEMORY_KEY_NAMES:
-        #     value = memory.getData(key)
-        #     line.append(value)
         line = readRobotData(memory)
         jsonify(line)
         data.append(line)
