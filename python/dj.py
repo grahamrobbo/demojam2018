@@ -54,16 +54,17 @@ def readRobotData(memory):
     """ Read the data from ALMemory.
     Returns a key/value hash table
     """
-    reading = {}
+    robotData = {}
     for key in ALMEMORY_KEY_NAMES:
-        reading[key] = memory.getData(key)
-    return reading
+        robotData[key] = memory.getData(key)
+    robotData['now'] = datetime.now()
+    return robotData
 
 def jsonify(list):
-    simple = dict(now=datetime.now(),
-              readings=list)
-
-    print json.dumps(simple, cls=DateTimeEncoder)
+    # simple = dict(now=datetime.now(),
+    #           readings=list)
+    # list['now'] = datetime.now()
+    print json.dumps(list, cls=DateTimeEncoder)
 
 def recordData(nao_ip):
     """ Record the data from ALMemory.
@@ -75,9 +76,9 @@ def recordData(nao_ip):
 
     data = list()
     for i in range (1, 10):
-        line = jsonify(readRobotData(memory))
+        line = readRobotData(memory)
         data.append(line)
-        #print json.dumps(line, cls=DateTimeEncoder)
+        print json.dumps(line, cls=DateTimeEncoder)
         time.sleep(0.5)
     return data
 
