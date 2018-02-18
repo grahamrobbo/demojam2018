@@ -20,42 +20,70 @@
     function createChart(canvas) {
         return new Chart(canvas.getContext("2d"), oChartConfig[canvas.id.replace('chart', '')]);
     }
-    var aCharts = [];
+    var oCharts = {};
     window.onload = function () {
         var aCanvas = document.getElementsByTagName('canvas');
         for (var i = 0; i < aCanvas.length; i++) {
-            aCharts.push(createChart(aCanvas[i]));
+            oCharts[aCanvas[i].id.replace('chart', '')] = createChart(aCanvas[i]);
         }
     };
     /*
     Websocket handler
      */
-    function WebSocketTest() {
-        if ("WebSocket" in window) {
-            alert("WebSocket is supported by your Browser!");
-            // Let us open a web socket
-            var ws = new WebSocket("ws://localhost/sap/bc/apc/sap/ydj2018");
-            ws.onopen = function () {
-                // Web Socket is connected, send data using send()
-                ws.send("Message to send");
-                alert("Message is sent...");
-            };
-            ws.onmessage = function (evt) {
-                var received_msg = evt.data;
-                alert("Message is received...");
-            };
-            ws.onclose = function () {
-                // websocket is closed.
-                alert("Connection is closed...");
-            };
-            window.onbeforeunload = function (event) {
-                socket.close();
-            };
-        } else {
-            // The browser doesn't support WebSocket
-            alert("WebSocket NOT supported by your Browser!");
+    sap.ui.define(["sap/ui/core/ws/SapPcpWebSocket"]);
+    var oWebSocket;
+
+    function _setupWebsocketChannel() {
+        // Check if WebSockets are supported
+        if (!sap.ui.Device.support.websocket) {
+            alert("WebSocket is not supported by your Browser!");
+            return;
         }
+        // Establish WebSocket Connection
+        oWebSocket = new sap.ui.core.ws.SapPcpWebSocket('/sap/bc/apc/sap/ydj2018', sap.ui.core.ws.SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
+        // Register Callbacj Functions on WebSocket Events
+        oWebSocket.attachOpen(function (oEvent) {
+            console.log('Websocket connection opened!');
+        });
+        if (window.location.hostname !== 'localhost') {
+            oWebSocket.attachClose(function (e) {
+                console.log('Websocket connection closed');
+                setTimeout(_setupWebsocketChannel, 1000);
+            });
+        }
+        oWebSocket.attachMessage(function (oEvent) {
+            // Message from server arrives
+            if (oEvent.getParameter("pcpFields").errorText) {
+                // Message is an error message
+                console.error(oEvent.getParameter("pcpFields").errorText);
+                return;
+            }
+            // Parse Message
+            var oPCPFields = oEvent.getParameter('pcpFields');
+            console.dir(oPCPFields);
+            var sMsg = oEvent.getParameter("data");
+            console.log('Msg=' + sMsg);
+            try {
+                oCharts.Head.addDataPoints(oPCPFields.headpitch, oPCPFields.headyaw);
+            } catch (e) {
+                console.error('Error adding content to Head chart');
+            }
+            // Format Timestamp
+            //var oFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({ style: "medium" });
+            //oEntry.date = oFormat.format(new Date(oEntry.date));
+            // update model
+        });
+        oWebSocket.attachClose(function (oEvent) {
+            console.error('Websocket connection closed');
+            // setTimeout(function () {
+            //     this._setupWebsocketChannel();
+            // }.bind(this), 1000);
+        });
+        oWebSocket.attachError(function (oEvent) {
+            console.error('Websocket error');
+        });
     }
+    _setupWebsocketChannel();
     /*
     Test foring data at charts
      */
@@ -68,8 +96,13 @@
         return min + (gSeed / 233280) * (max - min);
     };
     document.getElementById('addData').addEventListener('click', function () {
-        for (var i = 0; i < aCharts.length; i++) {
-            aCharts[i].addDataPoints(randomScalingFactor(), randomScalingFactor());
+        // for (var i = 0; i < oCharts.length; i++) {
+        //     oCharts[i].addDataPoints(randomScalingFactor(), randomScalingFactor());
+        // }
+        for (var property in oCharts) {
+            if (oCharts.hasOwnProperty(property)) {
+                oCharts[property].addDataPoints(randomScalingFactor(), randomScalingFactor());
+            }
         }
     });
     document.getElementById('wsTest').addEventListener('click', WebSocketTest);

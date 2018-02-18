@@ -7,119 +7,23 @@
     <title>Demojam 2018</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="./js/Chart/Chart.js"></script>
+      <script
+         id="sap-ui-bootstrap"
+         src="/ui5/sapui5-sdk-1.52.4/resources/sap-ui-core.js"
+         data-sap-ui-theme="sap_belize"
+         data-sap-ui-libs="sap.m"
+         data-sap-ui-compatVersion="edge"
+         data-sap-ui-bindingSyntax="complex"
+         data-sap-ui-preload="async"
+         data-sap-ui-resourceroots='{
+            "yelcho.dj18": "./"
+         }' >
+      </script>
     <script src="./js/chartConfigs.js"></script>
     <link rel="stylesheet" href="./css/style.css">
-    <style>
-    .container {
-        display: grid;
-        grid-gap: 5px;
-        grid-template-columns: repeat(9, 1fr);
-        grid-template-columns: repeat(9, 1fr);
-    }
-
-    .chartTop {
-        grid-column: 1 / -1;
-        grid-row: 1;
-    }
-
-    .chartHead {
-        grid-column: 4 / span 2;
-        grid-row: 2;
-    }
-
-    .chartRightShoulder {
-        grid-column: 3 / span 2;
-        grid-row: 3;
-    }
-
-    .chartLeftShoulder {
-        grid-column: 5 / span 2;
-        grid-row: 3;
-    }
-
-    .chartRightElbow {
-        grid-column: 2 / span 2;
-        grid-row: 4;
-    }
-
-    .chartLeftElbow {
-        grid-column: 6 / span 2;
-        grid-row: 4;
-    }
-
-    .chartRightWrist {
-        grid-column: 1 / span 2;
-        grid-row: 5;
-    }
-
-    .chartRightHip {
-        grid-column: 3 / span 2;
-        grid-row: 5;
-    }
-
-    .chartLeftHip {
-        grid-column: 5 / span 2;
-        grid-row: 5;
-    }
-
-    .chartLeftWrist {
-        grid-column: 7 / span 2;
-        grid-row: 5;
-    }
-
-    .chartRightHand {
-        grid-column: 1 / 2;
-        grid-row: 6;
-    }
-
-    .chartRightKnee {
-        grid-column: 3 / 4;
-        grid-row: 6;
-    }
-
-    .chartLeftKnee {
-        grid-column: 5 / 6;
-        grid-row: 6;
-    }
-
-    .chartLeftHand {
-        grid-column: 7 / 9;
-        grid-row: 6;
-    }
-
-    .chartRightAnkle {
-        grid-column: 3 / 4;
-        grid-row: 7;
-    }
-
-    .chartLeftAnkle {
-        grid-column: 5 / 6;
-        grid-row: 7;
-    }
-
-    .chartRightFoot {
-        grid-column: 3 / span 2;
-        grid-row: 8;
-    }
-
-    .chartLeftFoot {
-        grid-column: 5 / span 2;
-        grid-row: 8;
-    }
-
-    .item19 {
-        grid-column: 9;
-        grid-row: 2 / span 7;
-    }
-
-    .item20 {
-        grid-column: 1 / -1;
-        grid-row: : 10;
-    }
-    </style>
 </head>
 
-<body class="sapUiBody" id="content">
+<body id="content">
     <div class="container">
         <div class="item chartTop">
             <button id="addData">Add Data</button>
