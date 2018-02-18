@@ -66,7 +66,7 @@ def recordData(nao_ip):
     for i in range (1, 1000):
         r = requests.post(HTTP_ENDPOINT, headers=readRobotData(memory))
         #print "Status code is ", r.status_code
-        time.sleep(0.05) #0.5)
+        time.sleep(0.5) #0.5)
 
 def main():
     if len(sys.argv) < 2:

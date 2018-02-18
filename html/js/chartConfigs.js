@@ -13,6 +13,7 @@
     Set global chart configuration attributes
      */
     Chart.defaults.global.legend.display = false;
+    Chart.defaults.global.maintainAspectRatio = false;
     const scales = {
         xAxes: [{
             type: "time",
@@ -42,6 +43,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Head Yaw & Pitch',
                 display: true
             },
@@ -68,6 +71,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Shoulder Pitch & Roll',
                 display: true
             },
@@ -94,6 +99,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Shoulder Pitch & Roll',
                 display: true
             },
@@ -120,6 +127,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Elbow Yaw & Roll',
                 display: true
             },
@@ -146,6 +155,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Elbow Yaw & Roll',
                 display: true
             },
@@ -172,6 +183,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Wrist Yaw',
                 display: true
             },
@@ -192,6 +205,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Wrist Yaw',
                 display: true
             },
@@ -212,6 +227,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Hand',
                 display: true
             },
@@ -232,6 +249,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Hand',
                 display: true
             },
@@ -252,6 +271,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Hip Pitch, Roll & Yaw',
                 display: true
             },
@@ -284,6 +305,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Hip Pitch, Roll & Yaw',
                 display: true
             },
@@ -316,6 +339,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Knee Pitch',
                 display: true
             },
@@ -336,6 +361,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Knee Pitch',
                 display: true
             },
@@ -356,6 +383,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Ankle Pitch & Roll',
                 display: true
             },
@@ -382,6 +411,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Right Ankle Pitch & Roll',
                 display: true
             },
@@ -408,6 +439,8 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
+                fontColor: 'black',
+                fontSize: 14,
                 text: 'Left Foot Weight',
                 display: true
             },
@@ -428,7 +461,9 @@
         maxDatapoints: maxDatapoints,
         options: {
             title: {
-                text: 'Rigth Foot Weight',
+                fontColor: 'black',
+                fontSize: 14,
+                text: 'Right Foot Weight',
                 display: true
             },
             scales: scales

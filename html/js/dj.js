@@ -33,7 +33,7 @@
         const _setActual = function (elem, newValue) {
             var oldValue = elem.innerHTML;
             elem.innerHTML = newValue;
-            elem.classList.value = _defaultClass + (oldValue < newValue ? ' actualMore' : ' actualLess');
+            elem.classList.value = _defaultClass + (oldValue <= newValue ? ' actualMore' : ' actualLess');
         };
         for (var property in oPCPFields) {
             if (oPCPFields.hasOwnProperty(property)) {
@@ -45,6 +45,7 @@
             }
         }
     }
+
     function updateCharts(oPCPFields) {
         // This is where we update the charts
         try {
@@ -67,7 +68,7 @@
             oCharts.LeftFoot.addDataPoints(oPCPFields.leftfoottotalweight);
             oCharts.RightFoot.addDataPoints(oPCPFields.rightfoottotalweight);
         } catch (e) {
-            console.error('Error adding content to chart');
+            //console.error('Error adding content to chart');
         }
     }
     /*
@@ -95,6 +96,7 @@
             });
         }
         oWebSocket.attachMessage(function (oEvent) {
+            //console.time('Msg');
             // Message from server arrives
             var oPCPFields = oEvent.getParameter('pcpFields');
             if (oPCPFields.errorText) {
@@ -104,6 +106,7 @@
             }
             updateActuals(oPCPFields);
             updateCharts(oPCPFields);
+            //console.timeEnd('Msg');
         });
         oWebSocket.attachClose(function (oEvent) {
             console.error('Websocket connection closed');
@@ -119,6 +122,37 @@
     /*
     Test forcing data at charts
      */
+    var testPayload = {
+        headpitch: "0.0521140098572",
+        headyaw: "0.122678041458",
+        host: "was.yelcho.com.au:8000",
+        lanklepitch: "-1.20269775391",
+        lankleroll: "0.0828778743744",
+        leftfoottotalweight: "1.24458551407",
+        lelbowroll: "-0.796103954315",
+        lelbowyaw: "-1.19809579849",
+        lhand: "0.126800060272",
+        lhippitch: "-0.691792011261",
+        lhiproll: "-0.0935320854187",
+        lhipyawpitch: "-0.260738134384",
+        lkneepitch: "2.15062618256",
+        lshoulderpitch: "1.38976204395",
+        lshoulderroll: "-0.105887889862",
+        lwristyaw: "0.0643861293793",
+        ranklepitch: "-1.21181809902",
+        rankleroll: "-0.0966000556946",
+        relbowroll: "0.754770040512",
+        relbowyaw: "1.30846011639",
+        rhand: "0.177600026131",
+        rhippitch: "-0.714885950089",
+        rhiproll: "0.101285934448",
+        rhipyawpitch: "0.0",
+        rightfoottotalweight: "0.756608843803",
+        rkneepitch: "2.16144800186",
+        rshoulderpitch: "1.3622341156",
+        rshoulderroll: "0.118076086044",
+        rwristyaw: "-0.0276539325714"
+    };
     var gSeed = 345;
     randomScalingFactor = function (min, max) {
         var seed = gSeed;
@@ -128,9 +162,11 @@
         return min + (gSeed / 233280) * (max - min);
     };
     document.getElementById('addData').addEventListener('click', function () {
-        for (var property in oCharts) {
-            if (oCharts.hasOwnProperty(property)) {
-                oCharts[property].addDataPoints(randomScalingFactor(), randomScalingFactor());
-            }
-        }
+        updateActuals(testPayload);
+        updateCharts(testPayload);
+        // for (var property in oCharts) {
+        //     if (oCharts.hasOwnProperty(property)) {
+        //         oCharts[property].addDataPoints(randomScalingFactor(), randomScalingFactor());
+        //     }
+        //}
     });
