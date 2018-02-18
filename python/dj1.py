@@ -17,6 +17,8 @@ ALMEMORY_KEY_NAMES = [
 "Device/SubDeviceList/LElbowRoll/Position/Sensor/Value",
 "Device/SubDeviceList/RWristYaw/Position/Sensor/Value",
 "Device/SubDeviceList/LWristYaw/Position/Sensor/Value",
+"Device/SubDeviceList/RHand/Position/Sensor/Value",
+"Device/SubDeviceList/LHand/Position/Sensor/Value",
 "Device/SubDeviceList/RHipYawPitch/Position/Sensor/Value",
 "Device/SubDeviceList/RHipRoll/Position/Sensor/Value",
 "Device/SubDeviceList/RHipPitch/Position/Sensor/Value",
@@ -84,7 +86,7 @@ def recordData(nao_ip):
     for i in range (1, 1000):
         r = requests.post(HTTP_ENDPOINT, headers=readRobotData(memory))
         #print "Status code is ", r.status_code
-        time.sleep(0.1) #0.5)
+        time.sleep(0.05) #0.5)
 
 def main():
     """ Parse command line arguments,

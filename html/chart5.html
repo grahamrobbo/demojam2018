@@ -27,7 +27,6 @@
     <div class="container">
         <div class="item chartTop">
             <button id="addData">Add Data</button>
-            <button id="wsTest">WebSocketTest</button>
         </div>
         <div class="item chartHead">
             <canvas id="chartHead" config="configHead"></canvas>
@@ -80,8 +79,67 @@
         <div class="item chartLeftFoot">
             <canvas id="chartLeftFoot"></canvas>
         </div>
-        <div class="item item19">Temp</div>
-        <div class="item item20">Footer</div>
+        <div class="item tempGuage">Temp</div>
+        <div class="item footer">
+            <div class="actuals">
+            <div class="actual_Label">Head Yaw</div>
+            <div class="actual" id="actual_headyaw">2</div>
+            <div class="actual_Label">Head Pitch</div>
+            <div class="actual" id="actual_headpitch">4</div>
+            <div class="actual_Label">Right Shoulder Pitch</div>
+            <div class="actual" id="actual_rshoulderpitch">6</div>
+            <div class="actual_Label">Right Shoulder Roll</div>
+            <div class="actual" id="actual_rshoulderroll">8</div>
+            <div class="actual_Label">Left Shoulder Pitch</div>
+            <div class="actual" id="actual_lshoulderpitch">10</div>
+            <div class="actual_Label">Left Shoulder Roll</div>
+            <div class="actual" id="actual_lshoulderroll">8</div>
+            <div class="actual_Label">Right Elbow Roll</div>
+            <div class="actual" id="actual_relbowroll">14</div>
+            <div class="actual_Label">Right Elbow Yaw</div>
+            <div class="actual" id="actual_relbowyaw">16</div>
+            <div class="actual_Label">Left Elbow Roll</div>
+            <div class="actual" id="actual_lelbowroll">18</div>
+            <div class="actual_Label">Left Elbow Yaw</div>
+            <div class="actual" id="actual_lelbowyaw">20</div>
+            <div class="actual_Label">Right Wrist Yaw</div>
+            <div class="actual" id="actual_rwristyaw">22</div>
+            <div class="actual_Label">Left Wrist Yaw</div>
+            <div class="actual" id="actual_lwristyaw">24</div>
+            <div class="actual_Label">Right Hand</div>
+            <div class="actual" id="actual_rhand">22</div>
+            <div class="actual_Label">Left Hand</div>
+            <div class="actual" id="actual_lhand">22</div>
+            <div class="actual_Label">Right Hip Pitch</div>
+            <div class="actual" id="actual_rhippitch">26</div>
+            <div class="actual_Label">Right Hip Roll</div>
+            <div class="actual" id="actual_rhiproll">28</div>
+            <div class="actual_Label">Right Hip Yaw</div>
+            <div class="actual" id="actual_rhipyawpitch">30</div>
+            <div class="actual_Label">Left Hip Pitch</div>
+            <div class="actual" id="actual_lhippitch">26</div>
+            <div class="actual_Label">Left Hip Roll</div>
+            <div class="actual" id="actual_lhiproll">28</div>
+            <div class="actual_Label">Left Hip Yaw</div>
+            <div class="actual" id="actual_lhipyawpitch">30</div>
+            <div class="actual_Label">Right Knee Pitch</div>
+            <div class="actual" id="actual_rkneepitch">30</div>
+            <div class="actual_Label">Left Knee Pitch</div>
+            <div class="actual" id="actual_lkneepitch">30</div>
+            <div class="actual_Label">Left Ankle Pitch</div>
+            <div class="actual" id="actual_lanklepitch">30</div>
+            <div class="actual_Label">Left Ankle Roll</div>
+            <div class="actual" id="actual_lankleroll">30</div>
+            <div class="actual_Label">Right Ankle Pitch</div>
+            <div class="actual" id="actual_ranklepitch">30</div>
+            <div class="actual_Label">Right Ankle Roll</div>
+            <div class="actual" id="actual_rankleroll">30</div>
+            <div class="actual_Label">Left Foot Weight</div>
+            <div class="actual" id="actual_leftfoottotalweight">30</div>
+            <div class="actual_Label">Right Foot Weight</div>
+            <div class="actual" id="actual_rightfoottotalweight">30</div>
+        </div>
+        </div>
     </div>
     <script src="./js/dj.js"></script>
 </body>

@@ -64,7 +64,7 @@ h6 {
     align-items: center;
     border: 5px solid rgba(0, 0, 0, 0.03);
     border-radius: 3px;
-    font-size: 35px;
+    font-size: 10px;
     background-color: var(--yellow);
     /* best colour */
 }
@@ -170,12 +170,32 @@ h6 {
     grid-row: 8;
 }
 
-.item19 {
+.tempGuage {
     grid-column: 9;
     grid-row: 2 / span 7;
 }
 
-.item20 {
+.footer {
     grid-column: 1 / -1;
     grid-row: : 10;
+}
+
+.actuals {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.actual {
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+
+.actualMore {
+  color: green;
+}
+
+.actualLess {
+  color: red;
 }

@@ -27,6 +27,49 @@
             oCharts[aCanvas[i].id.replace('chart', '')] = createChart(aCanvas[i]);
         }
     };
+
+    function updateActuals(oPCPFields) {
+        const _defaultClass = 'actual';
+        const _setActual = function (elem, newValue) {
+            var oldValue = elem.innerHTML;
+            elem.innerHTML = newValue;
+            elem.classList.value = _defaultClass + (oldValue < newValue ? ' actualMore' : ' actualLess');
+        };
+        for (var property in oPCPFields) {
+            if (oPCPFields.hasOwnProperty(property)) {
+                try {
+                    _setActual(document.getElementById('actual_' + property), oPCPFields[property]);
+                } catch (e) {
+                    //console.log('Error '+property);
+                }
+            }
+        }
+    }
+    function updateCharts(oPCPFields) {
+        // This is where we update the charts
+        try {
+            oCharts.Head.addDataPoints(oPCPFields.headpitch, oPCPFields.headyaw);
+            oCharts.RightShoulder.addDataPoints(oPCPFields.rshoulderpitch, oPCPFields.rshoulderroll);
+            oCharts.LeftShoulder.addDataPoints(oPCPFields.lshoulderpitch, oPCPFields.lshoulderroll);
+            oCharts.RightElbow.addDataPoints(oPCPFields.relbowyaw, oPCPFields.relbowroll);
+            oCharts.LeftElbow.addDataPoints(oPCPFields.lelbowyaw, oPCPFields.lelbowroll);
+            oCharts.RightWrist.addDataPoints(oPCPFields.rwristyaw, oPCPFields.rwristroll);
+            oCharts.LeftWrist.addDataPoints(oPCPFields.lwristyaw);
+            oCharts.RightWrist.addDataPoints(oPCPFields.rwristyaw);
+            oCharts.LeftHip.addDataPoints(oPCPFields.lhipyawpitch, oPCPFields.lhiproll, oPCPFields.lhippitch);
+            oCharts.RightHip.addDataPoints(oPCPFields.rhipyawpitch, oPCPFields.rhiproll, oPCPFields.rhippitch);
+            oCharts.LeftHand.addDataPoints(oPCPFields.lhand);
+            oCharts.RightHand.addDataPoints(oPCPFields.rhand);
+            oCharts.LeftKnee.addDataPoints(oPCPFields.lkneepitch);
+            oCharts.RightKnee.addDataPoints(oPCPFields.rkneepitch);
+            oCharts.LeftAnkle.addDataPoints(oPCPFields.lanklepitch, oPCPFields.lankleroll);
+            oCharts.RightAnkle.addDataPoints(oPCPFields.ranklepitch, oPCPFields.rankleroll);
+            oCharts.LeftFoot.addDataPoints(oPCPFields.leftfoottotalweight);
+            oCharts.RightFoot.addDataPoints(oPCPFields.rightfoottotalweight);
+        } catch (e) {
+            console.error('Error adding content to chart');
+        }
+    }
     /*
     Websocket handler
      */
@@ -53,31 +96,20 @@
         }
         oWebSocket.attachMessage(function (oEvent) {
             // Message from server arrives
-            if (oEvent.getParameter("pcpFields").errorText) {
+            var oPCPFields = oEvent.getParameter('pcpFields');
+            if (oPCPFields.errorText) {
                 // Message is an error message
                 console.error(oEvent.getParameter("pcpFields").errorText);
                 return;
             }
-            // Parse Message
-            var oPCPFields = oEvent.getParameter('pcpFields');
-            console.dir(oPCPFields);
-            var sMsg = oEvent.getParameter("data");
-            console.log('Msg=' + sMsg);
-            try {
-                oCharts.Head.addDataPoints(oPCPFields.headpitch, oPCPFields.headyaw);
-            } catch (e) {
-                console.error('Error adding content to Head chart');
-            }
-            // Format Timestamp
-            //var oFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({ style: "medium" });
-            //oEntry.date = oFormat.format(new Date(oEntry.date));
-            // update model
+            updateActuals(oPCPFields);
+            updateCharts(oPCPFields);
         });
         oWebSocket.attachClose(function (oEvent) {
             console.error('Websocket connection closed');
-            // setTimeout(function () {
-            //     this._setupWebsocketChannel();
-            // }.bind(this), 1000);
+            setTimeout(function () {
+                _setupWebsocketChannel();
+            }.bind(this), 1000);
         });
         oWebSocket.attachError(function (oEvent) {
             console.error('Websocket error');
@@ -85,7 +117,7 @@
     }
     _setupWebsocketChannel();
     /*
-    Test foring data at charts
+    Test forcing data at charts
      */
     var gSeed = 345;
     randomScalingFactor = function (min, max) {
@@ -96,13 +128,9 @@
         return min + (gSeed / 233280) * (max - min);
     };
     document.getElementById('addData').addEventListener('click', function () {
-        // for (var i = 0; i < oCharts.length; i++) {
-        //     oCharts[i].addDataPoints(randomScalingFactor(), randomScalingFactor());
-        // }
         for (var property in oCharts) {
             if (oCharts.hasOwnProperty(property)) {
                 oCharts[property].addDataPoints(randomScalingFactor(), randomScalingFactor());
             }
         }
     });
-    document.getElementById('wsTest').addEventListener('click', WebSocketTest);

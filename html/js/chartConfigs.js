@@ -29,7 +29,7 @@
             }
         }],
         yAxes: [{
-            display: true,
+            display: false,
             scaleLabel: {
                 display: true,
                 labelString: 'value'
@@ -193,6 +193,46 @@
         options: {
             title: {
                 text: 'Right Wrist Yaw',
+                display: true
+            },
+            scales: scales
+        },
+        data: {
+            datasets: [{
+                label: "Yaw",
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.orange,
+                fill: false,
+                pointRadius: 0
+            }]
+        }
+    };
+    oChartConfig.LeftHand = {
+        type: "line",
+        maxDatapoints: maxDatapoints,
+        options: {
+            title: {
+                text: 'Left Hand',
+                display: true
+            },
+            scales: scales
+        },
+        data: {
+            datasets: [{
+                label: "Yaw",
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.orange,
+                fill: false,
+                pointRadius: 0
+            }]
+        }
+    };
+    oChartConfig.RightHand = {
+        type: "line",
+        maxDatapoints: maxDatapoints,
+        options: {
+            title: {
+                text: 'Right Hand',
                 display: true
             },
             scales: scales
