@@ -1,0 +1,209 @@
+/*
+  Oh Hello!
+
+  These are some base styles so that our tutorial looks good.
+
+  Let's go through the important bits real quick
+*/
+
+:root {
+    --yellow: #ffc600;
+    --black: #272727;
+}
+
+html {
+    /* border-box box model allows us to add padding and border to our elements without increasing their size */
+    box-sizing: border-box;
+    /* A system font stack so things load nice and quick! */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 900;
+    font-size: 10px;
+    color: var(--black);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+}
+
+
+/*
+  WAT IS THIS?!
+  We inherit box-sizing: border-box; from our <html> selector
+  Apparently this is a bit better than applying box-sizing: border-box; directly to the * selector
+*/
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-image: url("../img/NAO.png"), linear-gradient(110deg, #336699, #CCCCCC);
+    background-size: 100%;
+    min-height: calc(100vh - 100px);
+    margin: 5px;
+    /* background: white; */
+    background-position: fixed;
+    letter-spacing: -1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 5px 0;
+}
+
+
+/* Each item in our grid will contain numbers */
+
+.item {
+    /* We center the contents of these items. You can also do this with flexbox too! */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid rgba(0, 0, 0, 0.03);
+    border-radius: 3px;
+    font-size: 10px;
+/*    background-color: #336699;
+    opacity: 0.4;*/
+    height: 140px;
+    /* best colour */
+}
+
+.item p {
+    margin: 0 0 5px 0;
+}
+
+.container {
+    display: grid;
+/*    width: 100%;*/
+    grid-gap: 5px;
+    grid-template-columns: repeat(9, 10%);
+    grid-template-rows: repeat(9, 8%);
+}
+
+.chartTop {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 50px;
+}
+
+.chartHead {
+    grid-column: 4 / span 2;
+    grid-row: 2;
+}
+
+.chartRightShoulder {
+    grid-column: 3 / span 2;
+    grid-row: 3;
+}
+
+.chartLeftShoulder {
+    grid-column: 5 / span 2;
+    grid-row: 3;
+}
+
+.chartRightElbow {
+    grid-column: 2 / span 2;
+    grid-row: 4;
+}
+
+.chartLeftElbow {
+    grid-column: 6 / span 2;
+    grid-row: 4;
+}
+
+.chartRightWrist {
+    grid-column: 1 / span 2;
+    grid-row: 5;
+}
+
+.chartRightHip {
+    grid-column: 3 / span 2;
+    grid-row: 5;
+}
+
+.chartLeftHip {
+    grid-column: 5 / span 2;
+    grid-row: 5;
+}
+
+.chartLeftWrist {
+    grid-column: 7 / span 2;
+    grid-row: 5;
+}
+
+.chartRightHand {
+    grid-column: 1 / span 2;
+    grid-row: 6;
+}
+
+.chartRightKnee {
+    grid-column: 3 / span 2;
+    grid-row: 6;
+}
+
+.chartLeftKnee {
+    grid-column: 5 / span 2;
+    grid-row: 6;
+}
+
+.chartLeftHand {
+    grid-column: 7 / span 2;
+    grid-row: 6;
+}
+
+.chartRightAnkle {
+    grid-column: 3 / span 2;
+    grid-row: 7;
+}
+
+.chartLeftAnkle {
+    grid-column: 5 / span 2;
+    grid-row: 7;
+}
+
+.chartRightFoot {
+    grid-column: 3 / span 2;
+    grid-row: 8;
+}
+
+.chartLeftFoot {
+    grid-column: 5 / span 2;
+    grid-row: 8;
+}
+
+.tempGuage {
+    grid-column: 9;
+    grid-row: 2 / span 7;
+    height: 100%;
+}
+
+.footer {
+    grid-column: 1 / -1;
+    grid-row: : 10;
+}
+
+.actuals {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.actual_Label {
+  font-size: 14px;
+}
+.actual {
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.actualMore {
+  color: green;
+}
+
+.actualLess {
+  color: red;
+}

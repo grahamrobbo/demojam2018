@@ -1,4 +1,5 @@
 import time
+import threading
 
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 
@@ -11,6 +12,9 @@ class SimpleEcho(WebSocket):
 
     def handleConnected(self):
         print(self.address, 'connected')
+        # thread = threading.Thread(target=startPing, args=())
+        # thread.daemon = True                            # Daemonize thread
+        # thread.start()                                  # Start the execution
 
     def handleClose(self):
         print(self.address, 'closed')
