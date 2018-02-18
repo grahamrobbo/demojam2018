@@ -16,11 +16,21 @@
         }
         this.update();
     };
+
+    function createChart(canvas) {
+        return new Chart(
+            canvas.getContext("2d"),
+            oChartConfig[
+                canvas.id.replace('chart','config')
+            ] 
+        );
+    }
+    var aCharts = [];
     window.onload = function () {
-        var ctx = document.getElementById("chartHead").getContext("2d");
-        window.chartHead = new Chart(ctx, configHead);
-        var ctx2 = document.getElementById("chartRShoulder").getContext("2d");
-        window.chartRShoulder = new Chart(ctx2, configLeftShoulder);
+        var aCanvas = document.getElementsByTagName('canvas');
+        for (var i = 0; i < aCanvas.length; i++) {
+            aCharts.push(createChart(aCanvas[i]));
+        }
     };
     var gSeed = 345;
     randomScalingFactor = function (min, max) {
@@ -30,8 +40,8 @@
         gSeed = (seed * 9301 + 49297) % 233280;
         return min + (gSeed / 233280) * (max - min);
     };
-
     document.getElementById('addData').addEventListener('click', function () {
-        chartHead.addDataPoints(randomScalingFactor(), randomScalingFactor());
-        chartRShoulder.addDataPoints(randomScalingFactor(), randomScalingFactor());
+        for (var i = 0; i < aCharts.length; i++) {
+            aCharts[i].addDataPoints(randomScalingFactor(), randomScalingFactor());
+        }
     });

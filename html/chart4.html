@@ -12,61 +12,71 @@
     .chartDiv {
         width: 35%
     }
+
+    .chartContainerj {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-columns: repeat(9, 1fr);
+    }
     </style>
 </head>
 
 <body class="sapUiBody" id="content">
     <button id="addData">Add Data</button>
-    <div class="chartDiv">
-        <canvas id="chartHead"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRShoulder"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLShoulder"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRElbow"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLElbow"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRWrist"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRHip"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLHip"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLWrist"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRHand"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRKnee"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLKnee"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLHand"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRAnkle"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLAnkle"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartRFoot"></canvas>
-    </div>
-    <div class="chartDiv">
-        <canvas id="chartLFoot"></canvas>
+    <div class="chartContainer">
+        <div class="chartDiv chartTop"> Top </div>
+        <div class="chartDiv chartHead">
+            <canvas id="chartHead" config="configHead"></canvas>
+        </div>
+        <div class="chartDiv chartRightShoulder">
+            <canvas id="chartRightShoulder"></canvas>
+        </div>
+        <div class="chartDiv chartLeftShoulder">
+            <canvas id="chartLeftShoulder"></canvas>
+        </div>
+        <div class="chartDiv chartRightElbow">
+            <canvas id="chartRightElbow"></canvas>
+        </div>
+        <div class="chartDiv chartLeftElbow">
+            <canvas id="chartLeftElbow"></canvas>
+        </div>
+        <div class="chartDiv chartRightWrist">
+            <canvas id="chartRightWrist"></canvas>
+        </div>
+        <div class="chartDiv chartRightHip">
+            <canvas id="chartRightHip"></canvas>
+        </div>
+        <div class="chartDiv chartLeftHip">
+            <canvas id="chartLeftHip"></canvas>
+        </div>
+        <div class="chartDiv chartLeftWrist">
+            <canvas id="chartLeftWrist"></canvas>
+        </div>
+        <div class="chartDiv chartRightHand">
+            <canvas id="chartRightHand"></canvas>
+        </div>
+        <div class="chartDiv chartRightKnee">
+            <canvas id="chartRightKnee"></canvas>
+        </div>
+        <div class="chartDiv chartLeftKnee">
+            <canvas id="chartLeftKnee"></canvas>
+        </div>
+        <div class="chartDiv chartLeftHand">
+            <canvas id="chartLeftHand"></canvas>
+        </div>
+        <div class="chartDiv chartRightAnkle">
+            <canvas id="chartRightAnkle"></canvas>
+        </div>
+        <div class="chartDiv chartLeftAnkle">
+            <canvas id="chartLeftAnkle"></canvas>
+        </div>
+        <div class="chartDiv chartRightFoot">
+            <canvas id="chartRightFoot"></canvas>
+        </div>
+        <div class="chartDiv chartLeftFoot">
+            <canvas id="chartLeftFoot"></canvas>
+        </div>
     </div>
     <script src="./js/dj.js"></script>
 </body>

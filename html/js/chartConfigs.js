@@ -402,3 +402,10 @@
             }]
         }
     };
+    var oChartConfig = {
+        configHead: configHead,
+        configRightShoulder: configRightShoulder,
+        configLeftShoulder: configLeftShoulder,
+        configLeftElbow: configLeftElbow,
+        configRightElbow: configRightElbow
+    }
