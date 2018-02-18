@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Demojam 2018</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="./js/Chart/Chart.js"></script>
+    <script src="./js/chartConfigs.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+    .container {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-columns: repeat(9, 1fr);
+    }
+
+    .chartTop {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .chartHead {
+        grid-column: 4 / span 2;
+        grid-row: 2;
+    }
+
+    .chartRightShoulder {
+        grid-column: 3 / span 2;
+        grid-row: 3;
+    }
+
+    .chartLeftShoulder {
+        grid-column: 5 / span 2;
+        grid-row: 3;
+    }
+
+    .chartRightElbow {
+        grid-column: 2 / span 2;
+        grid-row: 4;
+    }
+
+    .chartLeftElbow {
+        grid-column: 6 / span 2;
+        grid-row: 4;
+    }
+
+    .chartRightWrist {
+        grid-column: 1 / span 2;
+        grid-row: 5;
+    }
+
+    .chartRightHip {
+        grid-column: 3 / span 2;
+        grid-row: 5;
+    }
+
+    .chartLeftHip {
+        grid-column: 5 / span 2;
+        grid-row: 5;
+    }
+
+    .chartLeftWrist {
+        grid-column: 7 / span 2;
+        grid-row: 5;
+    }
+
+    .chartRightHand {
+        grid-column: 1 / 2;
+        grid-row: 6;
+    }
+
+    .chartRightKnee {
+        grid-column: 3 / 4;
+        grid-row: 6;
+    }
+
+    .chartLeftKnee {
+        grid-column: 5 / 6;
+        grid-row: 6;
+    }
+
+    .chartLeftHand {
+        grid-column: 7 / 9;
+        grid-row: 6;
+    }
+
+    .chartRightAnkle {
+        grid-column: 3 / 4;
+        grid-row: 7;
+    }
+
+    .chartLeftAnkle {
+        grid-column: 5 / 6;
+        grid-row: 7;
+    }
+
+    .chartRightFoot {
+        grid-column: 3 / span 2;
+        grid-row: 8;
+    }
+
+    .chartLeftFoot {
+        grid-column: 5 / span 2;
+        grid-row: 8;
+    }
+
+    .item19 {
+        grid-column: 9;
+        grid-row: 2 / span 7;
+    }
+
+    .item20 {
+        grid-column: 1 / -1;
+        grid-row: : 10;
+    }
+    </style>
+</head>
+
+<body class="sapUiBody" id="content">
+    <div class="container">
+        <div class="item chartTop">
+            <button id="addData">Add Data</button>
+        </div>
+        <div class="item chartHead">
+            <canvas id="chartHead" config="configHead"></canvas>
+        </div>
+        <div class="item chartRightShoulder">
+            <canvas id="chartRightShoulder"></canvas>
+        </div>
+        <div class="item chartLeftShoulder">
+            <canvas id="chartLeftShoulder"></canvas>
+        </div>
+        <div class="item chartRightElbow">
+            <canvas id="chartRightElbow"></canvas>
+        </div>
+        <div class="item chartLeftElbow">
+            <canvas id="chartLeftElbow"></canvas>
+        </div>
+        <div class="item chartRightWrist">
+            <canvas id="chartRightWrist"></canvas>
+        </div>
+        <div class="item chartRightHip">
+            <canvas id="chartRightHip"></canvas>
+        </div>
+        <div class="item chartLeftHip">
+            <canvas id="chartLeftHip"></canvas>
+        </div>
+        <div class="item chartLeftWrist">
+            <canvas id="chartLeftWrist"></canvas>
+        </div>
+        <div class="item chartRightHand">
+            <canvas id="chartRightHand"></canvas>
+        </div>
+        <div class="item chartRightKnee">
+            <canvas id="chartRightKnee"></canvas>
+        </div>
+        <div class="item chartLeftKnee">
+            <canvas id="chartLeftKnee"></canvas>
+        </div>
+        <div class="item chartLeftHand">
+            <canvas id="chartLeftHand"></canvas>
+        </div>
+        <div class="item chartRightAnkle">
+            <canvas id="chartRightAnkle"></canvas>
+        </div>
+        <div class="item chartLeftAnkle">
+            <canvas id="chartLeftAnkle"></canvas>
+        </div>
+        <div class="item chartRightFoot">
+            <canvas id="chartRightFoot"></canvas>
+        </div>
+        <div class="item chartLeftFoot">
+            <canvas id="chartLeftFoot"></canvas>
+        </div>
+        <div class="item item19">Temp</div>
+        <div class="item item20">Footer</div>
+    </div>
+    <script src="./js/dj.js"></script>
+</body>
+
+</html>
