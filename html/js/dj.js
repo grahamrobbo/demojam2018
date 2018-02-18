@@ -21,7 +21,7 @@
         return new Chart(
             canvas.getContext("2d"),
             oChartConfig[
-                canvas.id.replace('chart','config')
+                canvas.id.replace('chart','')
             ] 
         );
     }

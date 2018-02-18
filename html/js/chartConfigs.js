@@ -7,7 +7,8 @@
         purple: 'rgb(153, 102, 255)',
         grey: 'rgb(201, 203, 207)'
     };
-    var color = Chart.helpers.color;
+    const color = Chart.helpers.color;
+    const maxDatapoints = 20;
     /*
     Set global chart configuration attributes
      */
@@ -35,8 +36,8 @@
             }
         }]
     };
-    const maxDatapoints = 5;
-    const configHead = {
+    const oChartConfig = {};
+    oChartConfig.Head = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -62,7 +63,7 @@
             }]
         }
     };
-    const configLeftShoulder = {
+    oChartConfig.LeftShoulder = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -88,7 +89,7 @@
             }]
         }
     };
-    const configRightShoulder = {
+    oChartConfig.RightShoulder = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -114,7 +115,7 @@
             }]
         }
     };
-    const configLeftElbow = {
+    oChartConfig.LeftElbow = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -140,7 +141,7 @@
             }]
         }
     };
-    const configRightElbow = {
+    oChartConfig.RightElbow = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -166,7 +167,7 @@
             }]
         }
     };
-    const configLeftWrist = {
+    oChartConfig.LeftWrist = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -186,7 +187,7 @@
             }]
         }
     };
-    const configRightWrist = {
+    oChartConfig.RightWrist = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -206,7 +207,7 @@
             }]
         }
     };
-    const configLeftHip = {
+    oChartConfig.LeftHip = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -238,7 +239,7 @@
             }]
         }
     };
-    const configRightHip = {
+    oChartConfig.RightHip = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -270,7 +271,7 @@
             }]
         }
     };
-    const configLeftKnee = {
+    oChartConfig.LeftKnee = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -290,7 +291,7 @@
             }]
         }
     };
-    const configRightKnee = {
+    oChartConfig.RightKnee = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -310,7 +311,7 @@
             }]
         }
     };
-    const configLeftAnkle = {
+    oChartConfig.LeftAnkle = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -336,7 +337,7 @@
             }]
         }
     };
-    const configRightAnkle = {
+    oChartConfig.RightAnkle = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -362,7 +363,7 @@
             }]
         }
     };
-    const configLeftFoot = {
+    oChartConfig.LeftFoot = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -382,7 +383,7 @@
             }]
         }
     };
-    const configRigthFoot = {
+    oChartConfig.RightFoot = {
         type: "line",
         maxDatapoints: maxDatapoints,
         options: {
@@ -402,10 +403,3 @@
             }]
         }
     };
-    var oChartConfig = {
-        configHead: configHead,
-        configRightShoulder: configRightShoulder,
-        configLeftShoulder: configLeftShoulder,
-        configLeftElbow: configLeftElbow,
-        configRightElbow: configRightElbow
-    }
