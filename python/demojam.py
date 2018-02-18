@@ -1,7 +1,4 @@
 # -*- encoding: UTF-8 -*-
-""" Record some sensors values and write them into a file.
-
-"""
 
 # MEMORY_VALUE_NAMES is the list of ALMemory values names you want to save.
 ALMEMORY_KEY_NAMES = [
@@ -42,17 +39,9 @@ import os
 import sys
 import time
 from datetime import datetime
-import json
 import requests
 
 from naoqi import ALProxy
-
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, datetime):
-            return o.isoformat()
-
-        return json.JSONEncoder.default(self, o)
 
 def readRobotData(memory):
     """ Read the data from ALMemory.
@@ -69,17 +58,8 @@ def readRobotData(memory):
     robotData['now'] = datetime.now()
     return robotData
 
-def jsonify(list):
-    # simple = dict(now=datetime.now(),
-    #           readings=list)
-    # list['now'] = datetime.now()
-    print json.dumps(list, cls=DateTimeEncoder)
-
 def recordData(nao_ip):
-    """ Record the data from ALMemory.
-    Returns a matrix of values
 
-    """
     print "Recording data ..."
     memory = ALProxy("ALMemory", nao_ip, 9559)
 
@@ -89,41 +69,26 @@ def recordData(nao_ip):
         time.sleep(0.05) #0.5)
 
 def main():
-    """ Parse command line arguments,
-    run recordData and write the results
-    into a csv file
-
-    """
     if len(sys.argv) < 2:
         nao_ip = ROBOT_IP
     else:
         nao_ip = sys.argv[1]
 
-    motion = ALProxy("ALMotion", nao_ip, 9559)
-    # Set stiffness on for Head motors
-    motion.setStiffnesses("Head", 1.0)
-    # Will go to 1.0 then 0 radian
-    # in two seconds
-    motion.post.angleInterpolation(
-        ["HeadYaw"],
-        [1.0, 0.0],
-        [1  , 2],
-        False
-    )
+    # motion = ALProxy("ALMotion", nao_ip, 9559)
+    # # Set stiffness on for Head motors
+    # motion.setStiffnesses("Head", 1.0)
+    # # Will go to 1.0 then 0 radian
+    # # in two seconds
+    # motion.post.angleInterpolation(
+    #     ["HeadYaw"],
+    #     [1.0, 0.0],
+    #     [1  , 2],
+    #     False
+    # )
     recordData(nao_ip)
 
-    # Gently set stiff off for Head motors
-    motion.setStiffnesses("Head", 0.0)
-
-    # output = os.path.abspath("data_recording.csv")
-
-    # with open(output, "w") as fp:
-    #     for line in data:
-    #         fp.write("; ".join(str(x) for x in line))
-    #         fp.write("\n")
-
-    # print "Results written to", output
-
+    # # Gently set stiff off for Head motors
+    # motion.setStiffnesses("Head", 0.0)
 
 if __name__ == "__main__":
     main()
