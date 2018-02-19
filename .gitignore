@@ -2,4 +2,5 @@
 .idea/*
 node_modules
 build
+html2/jqwidgets-ver5.6.0
 python/data_recording.csv
