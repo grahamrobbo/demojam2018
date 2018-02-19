@@ -71,12 +71,13 @@
             //console.error('Error adding content to chart');
         }
     }
+
     function _setupWebsocketChannel() {
         // Check if WebSockets are supported
-        if (!sap.ui.Device.support.websocket) {
-            alert("WebSocket is not supported by your Browser!");
-            return;
-        }
+        // if (!sap.ui.Device.support.websocket) {
+        //     alert("WebSocket is not supported by your Browser!");
+        //     return;
+        // }
         const _reader = new FileReader();
         _reader.addEventListener('loadend', (e) => {
             try {
@@ -107,4 +108,34 @@
         oWebSocket.onmessage = function (evt) { onWebSocketMessage(evt); };
         oWebSocket.onerror = function (evt) { onWebSocketError(evt); };
     }
+    const ranges = [{ startValue: 0, endValue: 12, style: { fill: '#0066FF', stroke: '#0066FF' } }, { startValue: 12, endValue: 28, style: { fill: '#00FF33', stroke: '#00FF33' } }, { startValue: 28, endValue: 35, style: { fill: '#FFCC00', stroke: '#FFCC00' } }, { startValue: 35, endValue: 40, style: { fill: '#FF0000', stroke: '#FF0000' } }];
+
+    function setTemp(temp) {
+        if ($('#gauge').jqxLinearGauge('value') !== temp) {
+            $('#gauge').jqxLinearGauge('value', temp);
+            // for (var i = 0; i < ranges.length; i++) {
+            //     if( temp >= ranges[i].startValue && temp <= ranges[i].endValue) {
+            //         $('#gauge').jqxLinearGauge('pointer').style = ranges[i].style;
+            //     }
+            // }
+        }
+    }
+    $(document).ready(function () {
+        $('#gauge').jqxLinearGauge({
+            orientation: 'vertical',
+            width: '100%',
+            height: '100%',
+            labels: { interval: 5 },
+            ticksMajor: { size: '10%', interval: 5, style: { stroke: '#A1A1A1', 'stroke-width': 1 }, visible: true },
+            ticksMinor: { size: '10%', interval: 1, style: { stroke: '#A1A1A1', 'stroke-width': 1 }, visible: true },
+            max: 40,
+            min: 0,
+            value: 0,
+            pointer: { pointerType: 'arrow', size: '30%', visible: true, offset: 10 },
+            colorScheme: 'scheme01',
+            background: { visible: false },
+            ranges: ranges
+        });
+        setTemp(18);
+    });
     _setupWebsocketChannel();

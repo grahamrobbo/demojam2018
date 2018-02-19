@@ -7,27 +7,19 @@
     <title>Demojam 2018</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="./js/Chart/Chart.js"></script>
-      <script
-         id="sap-ui-bootstrap"
-         src="/ui5/sapui5-sdk-1.52.4/resources/sap-ui-core.js"
-         data-sap-ui-theme="sap_belize"
-         data-sap-ui-libs="sap.m"
-         data-sap-ui-compatVersion="edge"
-         data-sap-ui-bindingSyntax="complex"
-         data-sap-ui-preload="async"
-         data-sap-ui-resourceroots='{
-            "yelcho.dj18": "./"
-         }' >
-      </script>
+    <link rel="stylesheet" href="jqwidgets-ver5.6.0/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxgauge.js"></script>
+    </script>
     <script src="./js/chartConfigs.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
+    <link rel="stylesheet" href="./css/style.css"> </head>
 
 <body id="content">
     <div class="container">
-        <div class="item chartTop">
-            Nao Dashboard
-        </div>
+        <div class="item chartTop"> Nao Dashboard </div>
         <div class="item chartHead">
             <canvas id="chartHead" config="configHead"></canvas>
         </div>
@@ -79,66 +71,68 @@
         <div class="item chartLeftFoot">
             <canvas id="chartLeftFoot"></canvas>
         </div>
-        <div class="item tempGuage">Temp</div>
+        <div class="item tempGuage">
+            <div id="gauge" style="margin-left: 20px; float: left;"></div>
+        </div>
         <div class="item footer">
             <div class="actuals">
-            <div class="actual_Label">Head Yaw</div>
-            <div class="actual" id="actual_headyaw">2</div>
-            <div class="actual_Label">Head Pitch</div>
-            <div class="actual" id="actual_headpitch">4</div>
-            <div class="actual_Label">Right Shoulder Pitch</div>
-            <div class="actual" id="actual_rshoulderpitch">6</div>
-            <div class="actual_Label">Right Shoulder Roll</div>
-            <div class="actual" id="actual_rshoulderroll">8</div>
-            <div class="actual_Label">Left Shoulder Pitch</div>
-            <div class="actual" id="actual_lshoulderpitch">10</div>
-            <div class="actual_Label">Left Shoulder Roll</div>
-            <div class="actual" id="actual_lshoulderroll">8</div>
-            <div class="actual_Label">Right Elbow Roll</div>
-            <div class="actual" id="actual_relbowroll">14</div>
-            <div class="actual_Label">Right Elbow Yaw</div>
-            <div class="actual" id="actual_relbowyaw">16</div>
-            <div class="actual_Label">Left Elbow Roll</div>
-            <div class="actual" id="actual_lelbowroll">18</div>
-            <div class="actual_Label">Left Elbow Yaw</div>
-            <div class="actual" id="actual_lelbowyaw">20</div>
-            <div class="actual_Label">Right Wrist Yaw</div>
-            <div class="actual" id="actual_rwristyaw">22</div>
-            <div class="actual_Label">Left Wrist Yaw</div>
-            <div class="actual" id="actual_lwristyaw">24</div>
-            <div class="actual_Label">Right Hand</div>
-            <div class="actual" id="actual_rhand">22</div>
-            <div class="actual_Label">Left Hand</div>
-            <div class="actual" id="actual_lhand">22</div>
-            <div class="actual_Label">Right Hip Pitch</div>
-            <div class="actual" id="actual_rhippitch">26</div>
-            <div class="actual_Label">Right Hip Roll</div>
-            <div class="actual" id="actual_rhiproll">28</div>
-            <div class="actual_Label">Right Hip Yaw</div>
-            <div class="actual" id="actual_rhipyawpitch">30</div>
-            <div class="actual_Label">Left Hip Pitch</div>
-            <div class="actual" id="actual_lhippitch">26</div>
-            <div class="actual_Label">Left Hip Roll</div>
-            <div class="actual" id="actual_lhiproll">28</div>
-            <div class="actual_Label">Left Hip Yaw</div>
-            <div class="actual" id="actual_lhipyawpitch">30</div>
-            <div class="actual_Label">Right Knee Pitch</div>
-            <div class="actual" id="actual_rkneepitch">30</div>
-            <div class="actual_Label">Left Knee Pitch</div>
-            <div class="actual" id="actual_lkneepitch">30</div>
-            <div class="actual_Label">Left Ankle Pitch</div>
-            <div class="actual" id="actual_lanklepitch">30</div>
-            <div class="actual_Label">Left Ankle Roll</div>
-            <div class="actual" id="actual_lankleroll">30</div>
-            <div class="actual_Label">Right Ankle Pitch</div>
-            <div class="actual" id="actual_ranklepitch">30</div>
-            <div class="actual_Label">Right Ankle Roll</div>
-            <div class="actual" id="actual_rankleroll">30</div>
-            <div class="actual_Label">Left Foot Weight</div>
-            <div class="actual" id="actual_leftfoottotalweight">30</div>
-            <div class="actual_Label">Right Foot Weight</div>
-            <div class="actual" id="actual_rightfoottotalweight">30</div>
-        </div>
+                <div class="actual_Label">Head Yaw</div>
+                <div class="actual" id="actual_headyaw">2</div>
+                <div class="actual_Label">Head Pitch</div>
+                <div class="actual" id="actual_headpitch">4</div>
+                <div class="actual_Label">Right Shoulder Pitch</div>
+                <div class="actual" id="actual_rshoulderpitch">6</div>
+                <div class="actual_Label">Right Shoulder Roll</div>
+                <div class="actual" id="actual_rshoulderroll">8</div>
+                <div class="actual_Label">Left Shoulder Pitch</div>
+                <div class="actual" id="actual_lshoulderpitch">10</div>
+                <div class="actual_Label">Left Shoulder Roll</div>
+                <div class="actual" id="actual_lshoulderroll">8</div>
+                <div class="actual_Label">Right Elbow Roll</div>
+                <div class="actual" id="actual_relbowroll">14</div>
+                <div class="actual_Label">Right Elbow Yaw</div>
+                <div class="actual" id="actual_relbowyaw">16</div>
+                <div class="actual_Label">Left Elbow Roll</div>
+                <div class="actual" id="actual_lelbowroll">18</div>
+                <div class="actual_Label">Left Elbow Yaw</div>
+                <div class="actual" id="actual_lelbowyaw">20</div>
+                <div class="actual_Label">Right Wrist Yaw</div>
+                <div class="actual" id="actual_rwristyaw">22</div>
+                <div class="actual_Label">Left Wrist Yaw</div>
+                <div class="actual" id="actual_lwristyaw">24</div>
+                <div class="actual_Label">Right Hand</div>
+                <div class="actual" id="actual_rhand">22</div>
+                <div class="actual_Label">Left Hand</div>
+                <div class="actual" id="actual_lhand">22</div>
+                <div class="actual_Label">Right Hip Pitch</div>
+                <div class="actual" id="actual_rhippitch">26</div>
+                <div class="actual_Label">Right Hip Roll</div>
+                <div class="actual" id="actual_rhiproll">28</div>
+                <div class="actual_Label">Right Hip Yaw</div>
+                <div class="actual" id="actual_rhipyawpitch">30</div>
+                <div class="actual_Label">Left Hip Pitch</div>
+                <div class="actual" id="actual_lhippitch">26</div>
+                <div class="actual_Label">Left Hip Roll</div>
+                <div class="actual" id="actual_lhiproll">28</div>
+                <div class="actual_Label">Left Hip Yaw</div>
+                <div class="actual" id="actual_lhipyawpitch">30</div>
+                <div class="actual_Label">Right Knee Pitch</div>
+                <div class="actual" id="actual_rkneepitch">30</div>
+                <div class="actual_Label">Left Knee Pitch</div>
+                <div class="actual" id="actual_lkneepitch">30</div>
+                <div class="actual_Label">Left Ankle Pitch</div>
+                <div class="actual" id="actual_lanklepitch">30</div>
+                <div class="actual_Label">Left Ankle Roll</div>
+                <div class="actual" id="actual_lankleroll">30</div>
+                <div class="actual_Label">Right Ankle Pitch</div>
+                <div class="actual" id="actual_ranklepitch">30</div>
+                <div class="actual_Label">Right Ankle Roll</div>
+                <div class="actual" id="actual_rankleroll">30</div>
+                <div class="actual_Label">Left Foot Weight</div>
+                <div class="actual" id="actual_leftfoottotalweight">30</div>
+                <div class="actual_Label">Right Foot Weight</div>
+                <div class="actual" id="actual_rightfoottotalweight">30</div>
+            </div>
         </div>
     </div>
     <script src="./js/dj.js"></script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title id='Description'>This sample demonstrates the basic Linear Gauge settings.</title>
+    <link rel="stylesheet" href="jqwidgets-ver5.6.0/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="jqwidgets-ver5.6.0/jqwidgets/jqxgauge.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var majorTicks = { size: '10%', interval: 10 },
+            minorTicks = { size: '5%', interval: 2.5, style: { 'stroke-width': 1, stroke: '#aaaaaa' } },
+            labels = { interval: 20 };
+        $('#gauge').jqxLinearGauge({
+            orientation: 'vertical',
+            width: '100px',
+            height: '550px',
+            labels: labels,
+            ticksMajor: true,
+            ticksMinor: true,
+            max: 40,
+            min: 0,
+            pointer: { size: '20%' },
+            colorScheme: 'scheme05',
+            background: { visible: false },
+            ranges: [{ startValue: 0, endValue: 10, style: { fill: '#FFF157', stroke: '#FFF157' } }, { startValue: 10, endValue: 25, style: { fill: '#FFA200', stroke: '#FFA200' } }, { startValue: 25, endValue: 40, style: { fill: '#FF4800', stroke: '#FF4800' } }]
+        });
+        $('#gauge').jqxLinearGauge('value', 15);
+    });
+    </script>
+</head>
+
+<body class='default'>
+    <div id="gauge" style="margin-left: 20px; float: left;"></div>
+</body>
+
+</html>
