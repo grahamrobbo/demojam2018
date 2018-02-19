@@ -20,3 +20,6 @@ print('demojam2014/melbtemp',memory.getData('demojam2014/melbtemp'))
 print('demojam2014/melbdesc',memory.getData('demojam2014/melbdesc'))
 print('demojam2014/pipelineSwell',memory.getData('demojam2014/pipelineSwell'))
 
+audiodevice = ALProxy("ALAudioDevice", ROBOT_IP, 9559)
+print('Volume ', audiodevice.getOutputVolume())
+

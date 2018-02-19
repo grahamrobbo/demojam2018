@@ -89,6 +89,7 @@ def readRobotDataMock():
             shortKey = key
         robotData[shortKey] = random.random()
     robotData['now'] = datetime.now()
+    robotData['volume'] = 16
     return robotData
 
 def recordDataMock():
@@ -104,7 +105,7 @@ def recordDataMock():
            client.sendMessage(str(payload))
         time.sleep(0.3)
 
-def readRobotData(memory):
+def readRobotData(memory,audiodevice):
     """ Read the data from ALMemory.
     Returns a key/value hash table
     """
@@ -117,6 +118,7 @@ def readRobotData(memory):
             shortKey = key
         robotData[shortKey] = memory.getData(key)
     robotData['now'] = datetime.now()
+    robotData['volume'] = audiodevice.getOutputVolume()
     return robotData
 
 def recordData(nao_ip):
@@ -129,8 +131,9 @@ def recordData(nao_ip):
     memory.insertData('demojam2014/melbtemp', 24)
     memory.insertData('demojam2014/pipelineSwell', '8 meters')
 
+    audiodevice = ALProxy("ALAudioDevice", nao_ip, 9559)
     while True:
-        payload = json.dumps(readRobotData(memory), cls=DateTimeEncoder)
+        payload = json.dumps(readRobotData(memory,audiodevice), cls=DateTimeEncoder)
         for client in clients:
            client.sendMessage(str(payload))
         time.sleep(0.3)

@@ -32,8 +32,12 @@
         const _defaultClass = 'actual';
         const _setActual = function (elem, newValue) {
             var oldValue = elem.innerHTML;
-            elem.innerHTML = newValue;
-            elem.classList.value = _defaultClass + (oldValue <= newValue ? ' actualMore' : ' actualLess');
+            if (newValue !== oldValue) {
+                elem.innerHTML = newValue;
+                elem.classList.value = _defaultClass + (oldValue <= newValue ? ' actualMore' : ' actualLess');
+            } else {
+                elem.classList.value = _defaultClass;
+            }
         };
         for (var property in oPCPFields) {
             if (oPCPFields.hasOwnProperty(property)) {
@@ -73,25 +77,32 @@
     }
 
     function _setupWebsocketChannel() {
-        // Check if WebSockets are supported
-        // if (!sap.ui.Device.support.websocket) {
-        //     alert("WebSocket is not supported by your Browser!");
-        //     return;
-        // }
         const _reader = new FileReader();
         _reader.addEventListener('loadend', (e) => {
             try {
-                const jsonData = JSON.parse(e.srcElement.result.toLowerCase());
-                updateActuals(jsonData);
-                updateCharts(jsonData);
+                const oRobotData = JSON.parse(e.srcElement.result.toLowerCase());
+                try {
+                    if (oRobotData.volume === 0) {
+                        for (var property in oRobotData) {
+                            if (oRobotData.hasOwnProperty(property)) {
+                                oRobotData[property] = 0;
+                            }
+                        }
+                        setTemp(oRobotData.volume);
+                    }
+                } catch (a) {}
+                updateActuals(oRobotData);
+                updateCharts(oRobotData);
             } catch (ex) {}
         });
         onWebSocketMessage = function (oEvent) {
-            //console.time('Msg2');
             // Message from server arrives
             try {
                 _reader.readAsText(oEvent.data);
             } catch (e) {}
+        };
+        onWebSocketOpen = function (oEvent) {
+            console.warn('Websocket connection open');
         };
         onWebSocketClose = function (oEvent) {
             console.warn('Websocket connection closed');
@@ -111,14 +122,15 @@
     const ranges = [{ startValue: 0, endValue: 12, style: { fill: '#0066FF', stroke: '#0066FF' } }, { startValue: 12, endValue: 28, style: { fill: '#00FF33', stroke: '#00FF33' } }, { startValue: 28, endValue: 35, style: { fill: '#FFCC00', stroke: '#FFCC00' } }, { startValue: 35, endValue: 40, style: { fill: '#FF0000', stroke: '#FF0000' } }];
 
     function setTemp(temp) {
-        if ($('#gauge').jqxLinearGauge('value') !== temp) {
-            $('#gauge').jqxLinearGauge('value', temp);
-            // for (var i = 0; i < ranges.length; i++) {
-            //     if( temp >= ranges[i].startValue && temp <= ranges[i].endValue) {
-            //         $('#gauge').jqxLinearGauge('pointer').style = ranges[i].style;
-            //     }
-            // }
+        var newTemp = isNaN(temp) ? 0 : Math.round(temp);
+        if ($('#gauge').jqxLinearGauge('value') !== newTemp) {
+            $('#gauge').jqxLinearGauge({ value: newTemp });
         }
+    }
+
+    function _tempIncrementer() {
+        setTemp($('#gauge').jqxLinearGauge('value') > 39 ? 0 : Number($('#gauge').jqxLinearGauge('value') + 1));
+        setTimeout(_tempIncrementer, 10000);
     }
     $(document).ready(function () {
         $('#gauge').jqxLinearGauge({
@@ -136,6 +148,9 @@
             background: { visible: false },
             ranges: ranges
         });
-        setTemp(18);
+        setTimeout(function () {
+            _setupWebsocketChannel();
+        }.bind(this), 1000);
     });
     _setupWebsocketChannel();
+    _tempIncrementer();
