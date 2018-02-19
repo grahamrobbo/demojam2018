@@ -71,102 +71,40 @@
             //console.error('Error adding content to chart');
         }
     }
-    /*
-    Websocket handler
-     */
-    sap.ui.define(["sap/ui/core/ws/SapPcpWebSocket"]);
-    var oWebSocket;
-
     function _setupWebsocketChannel() {
         // Check if WebSockets are supported
         if (!sap.ui.Device.support.websocket) {
             alert("WebSocket is not supported by your Browser!");
             return;
         }
-        // Establish WebSocket Connection
-        oWebSocket = new sap.ui.core.ws.SapPcpWebSocket('/sap/bc/apc/sap/ydj2018', sap.ui.core.ws.SapPcpWebSocket.SUPPORTED_PROTOCOLS.v10);
-        // Register Callbacj Functions on WebSocket Events
-        oWebSocket.attachOpen(function (oEvent) {
-            console.log('Websocket connection opened!');
+        const _reader = new FileReader();
+        _reader.addEventListener('loadend', (e) => {
+            try {
+                const jsonData = JSON.parse(e.srcElement.result.toLowerCase());
+                updateActuals(jsonData);
+                updateCharts(jsonData);
+            } catch (ex) {}
         });
-        if (window.location.hostname !== 'localhost') {
-            oWebSocket.attachClose(function (e) {
-                console.log('Websocket connection closed');
-                setTimeout(_setupWebsocketChannel, 1000);
-            });
-        }
-        oWebSocket.attachMessage(function (oEvent) {
-            //console.time('Msg');
+        onWebSocketMessage = function (oEvent) {
+            //console.time('Msg2');
             // Message from server arrives
-            var oPCPFields = oEvent.getParameter('pcpFields');
-            if (oPCPFields.errorText) {
-                // Message is an error message
-                console.error(oEvent.getParameter("pcpFields").errorText);
-                return;
-            }
-            updateActuals(oPCPFields);
-            updateCharts(oPCPFields);
-            //console.timeEnd('Msg');
-        });
-        oWebSocket.attachClose(function (oEvent) {
-            console.error('Websocket connection closed');
+            try {
+                _reader.readAsText(oEvent.data);
+            } catch (e) {}
+        };
+        onWebSocketClose = function (oEvent) {
+            console.warn('Websocket connection closed');
             setTimeout(function () {
                 _setupWebsocketChannel();
             }.bind(this), 1000);
-        });
-        oWebSocket.attachError(function (oEvent) {
+        };
+        onWebSocketError = function (oEvent) {
             console.error('Websocket error');
-        });
+        };
+        oWebSocket = new WebSocket('ws://localhost:8000');
+        oWebSocket.onopen = function (evt) { onWebSocketOpen(evt); };
+        oWebSocket.onclose = function (evt) { onWebSocketClose(evt); };
+        oWebSocket.onmessage = function (evt) { onWebSocketMessage(evt); };
+        oWebSocket.onerror = function (evt) { onWebSocketError(evt); };
     }
     _setupWebsocketChannel();
-    /*
-    Test forcing data at charts
-     */
-    var testPayload = {
-        headpitch: "0.0521140098572",
-        headyaw: "0.122678041458",
-        host: "was.yelcho.com.au:8000",
-        lanklepitch: "-1.20269775391",
-        lankleroll: "0.0828778743744",
-        leftfoottotalweight: "1.24458551407",
-        lelbowroll: "-0.796103954315",
-        lelbowyaw: "-1.19809579849",
-        lhand: "0.126800060272",
-        lhippitch: "-0.691792011261",
-        lhiproll: "-0.0935320854187",
-        lhipyawpitch: "-0.260738134384",
-        lkneepitch: "2.15062618256",
-        lshoulderpitch: "1.38976204395",
-        lshoulderroll: "-0.105887889862",
-        lwristyaw: "0.0643861293793",
-        ranklepitch: "-1.21181809902",
-        rankleroll: "-0.0966000556946",
-        relbowroll: "0.754770040512",
-        relbowyaw: "1.30846011639",
-        rhand: "0.177600026131",
-        rhippitch: "-0.714885950089",
-        rhiproll: "0.101285934448",
-        rhipyawpitch: "0.0",
-        rightfoottotalweight: "0.756608843803",
-        rkneepitch: "2.16144800186",
-        rshoulderpitch: "1.3622341156",
-        rshoulderroll: "0.118076086044",
-        rwristyaw: "-0.0276539325714"
-    };
-    var gSeed = 345;
-    randomScalingFactor = function (min, max) {
-        var seed = gSeed;
-        min = min === undefined ? -340 : min;
-        max = max === undefined ? 340 : max;
-        gSeed = (seed * 9301 + 49297) % 233280;
-        return min + (gSeed / 233280) * (max - min);
-    };
-    document.getElementById('addData').addEventListener('click', function () {
-        updateActuals(testPayload);
-        updateCharts(testPayload);
-        // for (var property in oCharts) {
-        //     if (oCharts.hasOwnProperty(property)) {
-        //         oCharts[property].addDataPoints(randomScalingFactor(), randomScalingFactor());
-        //     }
-        //}
-    });

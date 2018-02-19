@@ -8,7 +8,7 @@
         grey: 'rgb(201, 203, 207)'
     };
     const color = Chart.helpers.color;
-    const maxDatapoints = 50;
+    const maxDatapoints = 25;
     /*
     Set global chart configuration attributes
      */
