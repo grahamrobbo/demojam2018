@@ -157,15 +157,44 @@
         }
     }
 
-    // This incrementer should take us from 15 - 25 degrees in 3 minutes
+    // This incrementer should take us from 15 - 25 degrees in about 3.5 minutes
     function _tempIncrementer1() {
-        if (robotStatus === 'Talking') {
+        if (robotStatus !== 'Idle') {
             setTemp(tempurature < 15 ? 15 : tempurature + 0.25);
             if (tempurature < 25) {
-                setTimeout(_tempIncrementer1, 4500);
+                setTimeout(_tempIncrementer1, 4000);
+            } else {
+                setTimeout(_tempIncrementer2, 4000);
             }
+        } else {
+            setTemp(0);
         }
     }
+    // This incrementer should take us from 25 - 30 degrees in 90 seconds
+    function _tempIncrementer2() {
+        if (robotStatus !== 'Idle') {
+            setTemp(tempurature < 25 ? 25 : tempurature + 0.25);
+            if (tempurature < 30) {
+                setTimeout(_tempIncrementer2, 4500);
+            } else{
+                setTimeout(_tempIncrementer3, 4500);                
+            }
+        } else {
+            setTemp(0);
+        }
+    }
+    // This incrementer should take us from 30 - 35 degrees in 40 seconds
+    function _tempIncrementer3() {
+        if (robotStatus !== 'Idle') {
+            setTemp(tempurature < 30 ? 30 : tempurature + 0.25);
+            if (tempurature < 40) {
+                setTimeout(_tempIncrementer3, 2000);
+            }
+        } else {
+            setTemp(0);
+        }
+    }
+
     $(document).ready(function () {
         $('#gauge').jqxLinearGauge({
             orientation: 'vertical',
