@@ -11406,7 +11406,7 @@ class MyClass(GeneratedClass):
                                                                     <Parameter name="Timeout (s)" inherits_from_parent="0" content_type="2" value="0" default_value="1" min="0" max="5000" tooltip="Duration the box waits before stimulating the output." id="5" />
                                                                     <Parameter name="Trigger timerOutput if cancelled" inherits_from_parent="0" content_type="0" value="0" default_value="1" tooltip="" id="6" />
                                                                 </Box>
-                                                                <Box name="Bumpers" id="3" localization="8" tooltip="Listen to bumpers sensors. Stimulate onLeft or onRight output depending on&#x0A;which bumper is stimulated." x="619" y="297">
+                                                                <Box name="Bumpers" id="3" localization="8" tooltip="Listen to bumpers sensors. Stimulate onLeft or onRight output depending on&#x0A;which bumper is stimulated." x="608" y="420">
                                                                     <bitmap>media/images/box/movement/move_foot.png</bitmap>
                                                                     <bitmap>media/images/box/movement/move_leftfoot.png</bitmap>
                                                                     <script language="4">
@@ -11648,7 +11648,7 @@ class MyClass(GeneratedClass):
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
                                                                     <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
                                                                     <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
-                                                                    <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="0" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                                                                    <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="52" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
                                                                 </Box>
                                                                 <Box name="Tactile Head" id="11" localization="8" tooltip="Detect touch on head tactile sensor." x="603" y="64">
                                                                     <bitmap>media/images/box/sensors/tactileHead.png</bitmap>
@@ -11793,7 +11793,7 @@ class MyClass(GeneratedClass):
                                                                     </Timeline>
                                                                     <Resource name="Head-sequence" type="Lock" timeout="0" />
                                                                 </Box>
-                                                                <Box name="Ready to Go" id="12" localization="8" tooltip="Say some text. Note that you must open the box to enter the text." x="393" y="285">
+                                                                <Box name="Ready to Go" id="12" localization="8" tooltip="Say some text. Note that you must open the box to enter the text." x="302" y="494">
                                                                     <bitmap>media/images/box/interaction/say.png</bitmap>
                                                                     <script language="4">
                                                                         <content>
@@ -11895,7 +11895,7 @@ class MyClass(GeneratedClass):
 
 		self.tts = ALProxy("ALTextToSpeech")
 		self.sentences = {
-			"Arabic" : " مرحبا ",
+			"Arabic" : "  ",
 			"Czech" : " Ahoj ",
 			"Danish" : " Hej ",
 			"German" : " Hallo ",
@@ -11925,7 +11925,7 @@ class MyClass(GeneratedClass):
                                                                                         </script>
                                                                                         <pluginContent>
                                                                                             <arabic>
-                                                                                                <![CDATA[مرحبا]]>
+                                                                                                <![CDATA[]]>
 </arabic>
                                                                                             <czech>
                                                                                                 <![CDATA[Ahoj]]>
@@ -11987,7 +11987,7 @@ class MyClass(GeneratedClass):
                                                                                             <chinese>
                                                                                                 <![CDATA[]]>
 </chinese>
-                                                                                            <language>5</language>
+                                                                                            <language>6</language>
                                                                                         </pluginContent>
                                                                                         <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                                         <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -12002,6 +12002,52 @@ class MyClass(GeneratedClass):
                                                                     </Timeline>
                                                                     <Resource name="Speech" type="Lock" timeout="0" />
                                                                 </Box>
+                                                                <Box name="Mute" id="13" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="488" y="565">
+                                                                    <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+                                                                    <script language="4">
+                                                                        <content>
+                                                                            <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+                                                                    </script>
+                                                                    <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                                                                    <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+                                                                    <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+                                                                    <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="0" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                                                                </Box>
+                                                                <Box name="Speaker Vol 50" id="14" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="292" y="288">
+                                                                    <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+                                                                    <script language="4">
+                                                                        <content>
+                                                                            <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+                                                                    </script>
+                                                                    <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                                                                    <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+                                                                    <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+                                                                    <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="50" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                                                                </Box>
                                                                 <Link inputowner="1" indexofinput="2" outputowner="4" indexofoutput="4" />
                                                                 <Link inputowner="6" indexofinput="2" outputowner="2" indexofoutput="4" />
                                                                 <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
@@ -12013,10 +12059,12 @@ class MyClass(GeneratedClass):
                                                                 <Link inputowner="3" indexofinput="2" outputowner="9" indexofoutput="4" />
                                                                 <Link inputowner="10" indexofinput="2" outputowner="4" indexofoutput="4" />
                                                                 <Link inputowner="11" indexofinput="2" outputowner="9" indexofoutput="4" />
-                                                                <Link inputowner="12" indexofinput="2" outputowner="9" indexofoutput="4" />
                                                                 <Link inputowner="5" indexofinput="2" outputowner="11" indexofoutput="9" />
                                                                 <Link inputowner="2" indexofinput="2" outputowner="3" indexofoutput="8" />
                                                                 <Link inputowner="3" indexofinput="3" outputowner="5" indexofoutput="4" />
+                                                                <Link inputowner="14" indexofinput="2" outputowner="9" indexofoutput="4" />
+                                                                <Link inputowner="12" indexofinput="2" outputowner="14" indexofoutput="3" />
+                                                                <Link inputowner="13" indexofinput="2" outputowner="12" indexofoutput="4" />
                                                             </Diagram>
                                                         </BehaviorKeyframe>
                                                     </BehaviorLayer>
@@ -12443,7 +12491,7 @@ class MyClass(GeneratedClass):
                                                                                             <chinese>
                                                                                                 <![CDATA[]]>
 </chinese>
-                                                                                            <language>9</language>
+                                                                                            <language>10</language>
                                                                                         </pluginContent>
                                                                                         <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                                         <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -14292,12 +14340,12 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("Real time data is posted into a River application running on HANA")]]>
+		self.onStopped("Real time data is posted into a web service running on Netweaver  ABAP system")]]>
 </content>
                                                                     </script>
                                                                     <pluginContent>
                                                                         <text>
-                                                                            <![CDATA[Real time data is posted into a River application running on HANA]]>
+                                                                            <![CDATA[Real time data is posted into a web service running on Netweaver  ABAP system]]>
 </text>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
@@ -14502,12 +14550,12 @@ class MyClass(GeneratedClass):
 		GeneratedClass.__init__(self)
 
 	def onInput_onStart(self):
-		self.onStopped("A Python application is providing the real-time data via websockets")]]>
+		self.onStopped("It uses an ABAP Messaging Channel to push the real-time data using websockets")]]>
 </content>
                                                                     </script>
                                                                     <pluginContent>
                                                                         <text>
-                                                                            <![CDATA[A Python application is providing the real-time data via websockets]]>
+                                                                            <![CDATA[It uses an ABAP Messaging Channel to push the real-time data using websockets]]>
 </text>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
@@ -15528,7 +15576,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -15665,7 +15713,7 @@ class MyClass(GeneratedClass):
 			"Danish" : " ^start(animations/Stand/Gestures/Hey_1) Hej ^wait(animations/Stand/Gestures/Hey_1) ",
 			"German" : " ^start(animations/Stand/Gestures/Hey_1) Hallo ^wait(animations/Stand/Gestures/Hey_1) ",
 			"Greek" : "  ",
-			"English" : " Meanwhile at Bells Beach the swell is running at %s ",
+			"English" : " Meanwhile at Korora it is 25 degrees celcius and fine ",
 			"Spanish" : " ^start(animations/Stand/Gestures/Hey_1) Hola ^wait(animations/Stand/Gestures/Hey_1) ",
 			"Finnish" : " ^start(animations/Stand/Gestures/Hey_1) Hei ^wait(animations/Stand/Gestures/Hey_1) ",
 			"French" : " ^start(animations/Stand/Gestures/Hey_1) Bonjour ^wait(animations/Stand/Gestures/Hey_1) ",
@@ -15705,7 +15753,7 @@ class MyClass(GeneratedClass):
                                                                             <![CDATA[]]>
 </greek>
                                                                         <english>
-                                                                            <![CDATA[Meanwhile at Bells Beach the swell is running at %s]]>
+                                                                            <![CDATA[Meanwhile at Korora it is 25 degrees celcius and fine]]>
 </english>
                                                                         <spanish>
                                                                             <![CDATA[^start(animations/Stand/Gestures/Hey_1) Hola ^wait(animations/Stand/Gestures/Hey_1)]]>
@@ -15752,7 +15800,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -15766,7 +15814,7 @@ class MyClass(GeneratedClass):
                                                     </BehaviorLayer>
                                                 </Timeline>
                                             </Box>
-                                            <Box name="Weather Phrase" id="34" localization="8" tooltip="Give wether details" x="1448" y="730">
+                                            <Box name="Weather Phrase" id="34" localization="8" tooltip="Give wether details" x="1524" y="929">
                                                 <bitmap>media/images/box/interaction/say.png</bitmap>
                                                 <script language="4">
                                                     <content>
@@ -15976,7 +16024,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -16561,7 +16609,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -16785,7 +16833,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -17009,7 +17057,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>10</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -17149,7 +17197,6 @@ class MyClass(GeneratedClass):
                                             <Link inputowner="11" indexofinput="2" outputowner="4" indexofoutput="3" />
                                             <Link inputowner="26" indexofinput="2" outputowner="11" indexofoutput="3" />
                                             <Link inputowner="28" indexofinput="2" outputowner="33" indexofoutput="4" />
-                                            <Link inputowner="34" indexofinput="2" outputowner="28" indexofoutput="4" />
                                             <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
                                             <Link inputowner="17" indexofinput="2" outputowner="20" indexofoutput="3" />
                                             <Link inputowner="20" indexofinput="2" outputowner="16" indexofoutput="3" />
@@ -17159,13 +17206,13 @@ class MyClass(GeneratedClass):
                                             <Link inputowner="4" indexofinput="2" outputowner="3" indexofoutput="3" />
                                             <Link inputowner="12" indexofinput="2" outputowner="26" indexofoutput="3" />
                                             <Link inputowner="16" indexofinput="2" outputowner="31" indexofoutput="3" />
-                                            <Link inputowner="29" indexofinput="2" outputowner="34" indexofoutput="4" />
                                             <Link inputowner="33" indexofinput="2" outputowner="32" indexofoutput="4" />
                                             <Link inputowner="16" indexofinput="2" outputowner="13" indexofoutput="3" />
                                             <Link inputowner="36" indexofinput="2" outputowner="19" indexofoutput="4" />
                                             <Link inputowner="37" indexofinput="2" outputowner="36" indexofoutput="4" />
                                             <Link inputowner="18" indexofinput="2" outputowner="38" indexofoutput="3" />
                                             <Link inputowner="38" indexofinput="2" outputowner="17" indexofoutput="3" />
+                                            <Link inputowner="29" indexofinput="2" outputowner="28" indexofoutput="4" />
                                         </Diagram>
                                     </BehaviorKeyframe>
                                 </BehaviorLayer>
@@ -17581,7 +17628,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -18754,7 +18801,7 @@ class MyClass(GeneratedClass):
 			"Danish" : " Hej ",
 			"German" : " Hallo ",
 			"Greek" : "  ",
-			"English" : " Have a great demo jam ",
+			"English" : " Have a great evening - goodnight ",
 			"Spanish" : " Hola ",
 			"Finnish" : " Hei ",
 			"French" : " Bonjour ",
@@ -18794,7 +18841,7 @@ class MyClass(GeneratedClass):
                                                                             <![CDATA[]]>
 </greek>
                                                                         <english>
-                                                                            <![CDATA[Have a great demo jam]]>
+                                                                            <![CDATA[Have a great evening - goodnight]]>
 </english>
                                                                         <spanish>
                                                                             <![CDATA[Hola]]>
@@ -18841,7 +18888,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -19055,7 +19102,7 @@ class MyClass(GeneratedClass):
                                                                         <chinese>
                                                                             <![CDATA[]]>
 </chinese>
-                                                                        <language>9</language>
+                                                                        <language>5</language>
                                                                     </pluginContent>
                                                                     <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                                                                     <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Data is sent on the output when this input is stimulated." id="2" />
@@ -19270,6 +19317,29 @@ class MyClass(GeneratedClass):
                                                 <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished. It contains the inserted value in ALMemory." id="4" />
                                                 <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Output when error is raised by the behavior. Contains the error message." id="5" />
                                             </Box>
+                                            <Box name="Mute" id="10" localization="8" tooltip="Set the sound volume between 0 (mute) and 100 (max).&#x0A;&#x0A;V1.1.0&#x0A;" x="858" y="334">
+                                                <bitmap>media/images/box/interaction/processing_sound.png</bitmap>
+                                                <script language="4">
+                                                    <content>
+                                                        <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onInput_onSet(self):
+        try:
+            self.audiodevice = ALProxy("ALAudioDevice")
+            self.audiodevice.setOutputVolume(self.getParameter("Volume (%)"))
+        except Exception as e:
+            self.logger.error(e)
+
+        self.onReady() # activate output of the box]]>
+</content>
+                                                </script>
+                                                <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                                                <Input name="onSet" type="1" type_size="1" nature="1" inner="0" tooltip="The data is set when a signal is received on this input." id="2" />
+                                                <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when the data has been set." id="3" />
+                                                <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="0" default_value="50" min="0" max="100" tooltip="Percentage of maximum output volume." id="4" />
+                                            </Box>
                                             <Link inputowner="1" indexofinput="2" outputowner="3" indexofoutput="4" />
                                             <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="4" />
                                             <Link inputowner="4" indexofinput="2" outputowner="2" indexofoutput="4" />
@@ -19278,6 +19348,7 @@ class MyClass(GeneratedClass):
                                             <Link inputowner="8" indexofinput="2" outputowner="1" indexofoutput="4" />
                                             <Link inputowner="0" indexofinput="3" outputowner="4" indexofoutput="3" />
                                             <Link inputowner="6" indexofinput="2" outputowner="1" indexofoutput="4" />
+                                            <Link inputowner="10" indexofinput="2" outputowner="2" indexofoutput="4" />
                                         </Diagram>
                                     </BehaviorKeyframe>
                                 </BehaviorLayer>

@@ -7,6 +7,7 @@
     <Dialogs />
     <Resources>
         <File name="evolution_of_dance_SHORT" src="evolution_of_dance_SHORT.mp3" />
+        <File name="icon" src="icon.png" />
     </Resources>
     <Topics />
     <IgnoredPaths />

@@ -88,7 +88,9 @@
                                 oRobotData[property] = 0;
                             }
                         }
-                        setTemp(oRobotData.volume);
+                        _setRobotStatus('Idle');
+                    } else {
+                        _setRobotStatus('Talking');
                     }
                 } catch (a) {}
                 updateActuals(oRobotData);
@@ -120,17 +122,49 @@
         oWebSocket.onerror = function (evt) { onWebSocketError(evt); };
     }
     const ranges = [{ startValue: 0, endValue: 12, style: { fill: '#0066FF', stroke: '#0066FF' } }, { startValue: 12, endValue: 28, style: { fill: '#00FF33', stroke: '#00FF33' } }, { startValue: 28, endValue: 35, style: { fill: '#FFCC00', stroke: '#FFCC00' } }, { startValue: 35, endValue: 40, style: { fill: '#FF0000', stroke: '#FF0000' } }];
+    let tempurature = 0;
+    let robotStatus = 'Idle';
 
-    function setTemp(temp) {
-        var newTemp = isNaN(temp) ? 0 : Math.round(temp);
-        if ($('#gauge').jqxLinearGauge('value') !== newTemp) {
-            $('#gauge').jqxLinearGauge({ value: newTemp });
+    function _setRobotStatus(status) {
+        switch (status) {
+        case 'Idle':
+            robotStatus = status;
+            break;
+        case 'Talking':
+            switch (robotStatus) {
+            case 'Idle':
+                robotStatus = status;
+                _tempIncrementer1();
+                break;
+            default:
+            }
+            break;
+        case 'Dancing':
+            break;
+        default:
         }
     }
 
-    function _tempIncrementer() {
-        setTemp($('#gauge').jqxLinearGauge('value') > 39 ? 0 : Number($('#gauge').jqxLinearGauge('value') + 1));
-        setTimeout(_tempIncrementer, 10000);
+    function setTemp(temp) {
+        tempurature = isNaN(temp) ? 0 : temp;
+        console.log('Temp='+tempurature);
+        if (robotStatus === 'Idle') {
+            $('#gauge').jqxLinearGauge({ value: 0 });
+        } else {
+            if ($('#gauge').jqxLinearGauge('value') !== tempurature) {
+                $('#gauge').jqxLinearGauge({ value: tempurature });
+            }
+        }
+    }
+
+    // This incrementer should take us from 15 - 25 degrees in 3 minutes
+    function _tempIncrementer1() {
+        if (robotStatus === 'Talking') {
+            setTemp(tempurature < 15 ? 15 : tempurature + 0.25);
+            if (tempurature < 25) {
+                setTimeout(_tempIncrementer1, 4500);
+            }
+        }
     }
     $(document).ready(function () {
         $('#gauge').jqxLinearGauge({
@@ -146,11 +180,11 @@
             pointer: { pointerType: 'arrow', size: '30%', visible: true, offset: 10 },
             colorScheme: 'scheme01',
             background: { visible: false },
-            ranges: ranges
+            ranges: ranges,
+            animationDuration: 100
         });
         setTimeout(function () {
             _setupWebsocketChannel();
         }.bind(this), 1000);
     });
     _setupWebsocketChannel();
-    _tempIncrementer();

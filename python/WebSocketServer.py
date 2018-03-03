@@ -52,6 +52,7 @@ from naoqi import ALProxy
 
 clients = []
 handlerRunning = False
+cntr = 0
 
 class SimpleChat(WebSocket):
 
@@ -82,6 +83,8 @@ class DateTimeEncoder(json.JSONEncoder):
 def readRobotDataMock():
     robotData = {}
     shortKey = ''
+    global cntr
+    cntr += 1
     for key in ALMEMORY_KEY_NAMES:
         try:
             shortKey = key.split('/')[2]
@@ -89,7 +92,10 @@ def readRobotDataMock():
             shortKey = key
         robotData[shortKey] = random.random()
     robotData['now'] = datetime.now()
-    robotData['volume'] = 16
+    if cntr > 20:
+      robotData['volume'] = cntr
+    else:
+      robotData['volume'] = 0
     return robotData
 
 def recordDataMock():
