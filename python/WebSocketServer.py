@@ -92,7 +92,7 @@ def readRobotDataMock():
             shortKey = key
         robotData[shortKey] = random.random()
     robotData['now'] = datetime.now()
-    if cntr > 20:
+    if cntr > 60:
       robotData['volume'] = cntr
     else:
       robotData['volume'] = 0
@@ -135,6 +135,8 @@ def recordData(nao_ip):
     memory.insertData('demojam2014/bellsSwell', '2 point 1 meters')
     memory.insertData('demojam2014/melbdesc', 'and slightly Cloudy')
     memory.insertData('demojam2014/melbtemp', 24)
+    memory.insertData('demojam2014/kororadesc', 'and fine')
+    memory.insertData('demojam2014/kororatemp', 26)
     memory.insertData('demojam2014/pipelineSwell', '8 meters')
 
     audiodevice = ALProxy("ALAudioDevice", nao_ip, 9559)
