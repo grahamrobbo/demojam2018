@@ -210,3 +210,32 @@ h6 {
 .actualLess {
     color: red;
 }
+
+#watermark1 {
+  color: #ffcd01;
+  font-size: 200pt;
+/*  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);*/
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 99;
+/*  left:200px;*/
+  top:0px;
+  text-align: center;
+}
+#watermark2 {
+  color: #ff0002;
+  font-size: 200pt;
+/*  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);*/
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 99;
+/*  left:200px;*/
+  top:0px;
+  text-align: center;
+}

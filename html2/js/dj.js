@@ -129,6 +129,7 @@
         switch (status) {
         case 'Idle':
             robotStatus = status;
+            setTemp(0);
             break;
         case 'Talking':
             switch (robotStatus) {
@@ -147,7 +148,7 @@
 
     function setTemp(temp) {
         tempurature = isNaN(temp) ? 0 : temp;
-        console.log('Temp='+tempurature);
+        console.log('Temp=' + tempurature);
         if (robotStatus === 'Idle') {
             $('#gauge').jqxLinearGauge({ value: 0 });
         } else {
@@ -156,15 +157,14 @@
             }
         }
     }
-
-    // This incrementer should take us from 15 - 25 degrees in about 3.5 minutes
+    // This incrementer should take us from 15 - 25 degrees in about 3 minutes
     function _tempIncrementer1() {
         if (robotStatus !== 'Idle') {
             setTemp(tempurature < 15 ? 15 : tempurature + 0.25);
             if (tempurature < 25) {
-                setTimeout(_tempIncrementer1, 4000);
+                setTimeout(_tempIncrementer1, 4500);
             } else {
-                setTimeout(_tempIncrementer2, 4000);
+                setTimeout(_tempIncrementer2, 4500);
             }
         } else {
             setTemp(0);
@@ -176,8 +176,8 @@
             setTemp(tempurature < 25 ? 25 : tempurature + 0.25);
             if (tempurature < 30) {
                 setTimeout(_tempIncrementer2, 4500);
-            } else{
-                setTimeout(_tempIncrementer3, 4500);                
+            } else {
+                setTimeout(_tempIncrementer3, 4500);
             }
         } else {
             setTemp(0);
@@ -193,8 +193,31 @@
         } else {
             setTemp(0);
         }
+        if (tempurature === 31 || tempurature === 32 || tempurature === 33 || tempurature === 34) {
+            _tempWarning(2000);
+        } else {
+            if(tempurature >= 35) {
+                _tempAlert(1000);
+            }
+        }
     }
 
+    function _tempWarning(timeout) {
+        if ($('#watermark1').css('display') === 'none') {
+            $('#watermark1').show();
+            setTimeout(function () {
+                $('#watermark1').hide();
+            }, timeout || 1000)
+        }
+    }
+    function _tempAlert(timeout) {
+        if ($('#watermark2').css('display') === 'none') {
+            $('#watermark2').show();
+            setTimeout(function () {
+                $('#watermark2').hide();
+            }, timeout || 1000)
+        }
+    }
     $(document).ready(function () {
         $('#gauge').jqxLinearGauge({
             orientation: 'vertical',
