@@ -79,8 +79,8 @@ h6 {
 .container {
     display: grid;
     width: 100%;
-    grid-gap: 5px;
-    grid-template-columns: repeat(9, 10%);
+    grid-gap: 10px;
+    grid-template-columns: repeat(9, 10.64%);
     grid-template-rows: repeat(9, 8%);
 }
 

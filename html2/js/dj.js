@@ -33,6 +33,11 @@
         const _setActual = function (elem, newValue) {
             var oldValue = elem.innerHTML;
             if (newValue !== oldValue) {
+                if(newValue !== 0) {
+                    newValue = newValue.toFixed(5);
+                } else {
+                    newValue = '';
+                }
                 elem.innerHTML = newValue;
                 elem.classList.value = _defaultClass + (oldValue <= newValue ? ' actualMore' : ' actualLess');
             } else {
