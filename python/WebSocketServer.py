@@ -32,7 +32,7 @@ ALMEMORY_KEY_NAMES = [
 "leftFootTotalWeight"
 ]
 
-ROBOT_IP = "russel"
+ROBOT_IP = '192.168.1.4' #"russel"
 HTTP_ENDPOINT = "http://was.yelcho.com.au:8000/sap/dj2018" #"http://was.yelcho.com.au:8000/sap/public/ping"
 
 import os
