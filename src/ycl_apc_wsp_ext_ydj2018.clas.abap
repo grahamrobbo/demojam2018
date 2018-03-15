@@ -8,7 +8,7 @@ public section.
 
   methods IF_APC_WSP_EXT_PCP~ON_START
     redefinition .
-  methods IF_APC_WSP_EXT_PCP~ON_MESSAGE
+  methods IF_APC_WSP_EXT_PCP~ON_MESSAGE "efwkjfrkjwehr
     redefinition .
 protected section.
 private section.
